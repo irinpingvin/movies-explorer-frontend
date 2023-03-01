@@ -4,5 +4,6 @@
 @import url(./components/ProfileLink/ProfileLink.css);
 @import url(./components/NavigationLinks/NavigationLinks.css);
 @import url(./components/AuthLinks/AuthLinks.css);
+@import url(./components/Footer/Footer.css);
 @import url(./blocks/page/page.css);
 @import url(./blocks/page/__container/page__container.css);
