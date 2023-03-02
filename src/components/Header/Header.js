@@ -1,19 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ProfileLink from '../ProfileLink/ProfileLink';
-import NavigationLinks from '../NavigationLinks/NavigationLinks';
-import AuthLinks from '../AuthLinks/AuthLinks'
+import Navigation from '../Navigation/Navigation';
+import Menu from "../Menu/Menu";
 
 function Header() {
   // TODO
-  const isLoggedIn = true;
+  const isNavigationNeeded = true;
+
   return (
     <header className="header">
       <div className="header__tabs">
         <Link className="header__logo-link" to="/"></Link>
-        { isLoggedIn ? <NavigationLinks/> : null }
+        { isNavigationNeeded ? (
+          <>
+            <Navigation/>
+            <Menu/>
+          </>
+        ) : null }
       </div>
-      { isLoggedIn ? <ProfileLink/> : <AuthLinks/> }
     </header>
   );
 }

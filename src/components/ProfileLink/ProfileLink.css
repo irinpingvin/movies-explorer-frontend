@@ -1,39 +1,15 @@
 .profile-link {
-  display: flex;
-}
-
-.profile-link__text {
-  display: none;
-}
-
-@media screen and (min-width: 1280px) {
-  .profile-link__text {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.15;
-    color: #000000;
-    text-decoration: none;
-    margin: 0;
-    background-color: #F9F9F9;
-    border-radius: 20px;
-    width: 100px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.profile-link__icon {
-  background: url("../../images/header__navigation-icon.svg") no-repeat;
-  background-size: 40px 43px;
-  width: 40px;
-  height: 43px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.15;
+  color: #000000;
+  text-decoration: none;
   margin: 0;
-}
-
-@media screen and (min-width: 1280px) {
-  .profile-link__icon {
-    display: none;
-  }
+  background-color: #F9F9F9;
+  border-radius: 20px;
+  width: 100px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

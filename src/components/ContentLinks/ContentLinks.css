@@ -1,11 +1,11 @@
-.navigation-links {
+.content-links {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.navigation-links__movies {
-  visibility: hidden;
+.content-links__movies {
+  display: none;
   font-weight: 500;
   font-size: 13px;
   line-height: 1.4;
@@ -14,14 +14,8 @@
   text-decoration: none;
 }
 
-@media screen and (min-width: 1280px) {
-  .navigation-links__movies {
-    visibility: visible;
-  }
-}
-
-.navigation-links__saved-movies {
-  visibility: hidden;
+.content-links__saved-movies {
+  display: none;
   font-weight: 400;
   font-size: 13px;
   line-height: 1.4;
@@ -31,7 +25,11 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .navigation-links__saved-movies {
-    visibility: visible;
+  .content-links__movies {
+    display: block;
+  }
+
+  .content-links__saved-movies {
+    display: block;
   }
 }

@@ -1,0 +1,14 @@
+.menu {
+  background: url("../../images/header__navigation-icon.svg") no-repeat;
+  background-size: 40px 43px;
+  width: 40px;
+  height: 43px;
+  margin: 0;
+  border: none;
+}
+
+@media screen and (min-width: 1280px) {
+  .menu {
+    display: none;
+  }
+}
