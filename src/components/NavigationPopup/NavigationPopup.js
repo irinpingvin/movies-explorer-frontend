@@ -3,8 +3,7 @@ import ProfileLink from "../ProfileLink/ProfileLink";
 
 function NavigationPopup(props) {
   return(
-    // TODO ${props.isOpen ? 'popup_opened' : ''
-    <div className="popup popup_opened">
+    <div className={`popup ${props.isOpen ? 'popup_opened' : ''}`}>
       <div className="popup__container">
         <button className="popup__close-button" type="button" onClick={props.onClose}/>
         <div className="popup__navigation">
