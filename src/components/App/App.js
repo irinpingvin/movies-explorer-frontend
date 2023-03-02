@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from '../Header/Header';
 import Footer from "../Footer/Footer";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
+import Main from "../Main/Main";
 
 function App() {
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = React.useState(false);
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/" element={
             <>
               <Header isNavigationNeeded="true" onMenu={handleMenuClick}/>
+              <Main/>
               <Footer/>
             </>
           }>

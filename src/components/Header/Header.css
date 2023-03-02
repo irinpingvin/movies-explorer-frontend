@@ -1,5 +1,7 @@
 .header {
-  padding: 18px 14px;
+  padding: 18px 0;
+  margin: 0 auto;
+  max-width: 292px;
 }
 
 .header__tabs {
@@ -17,15 +19,13 @@
 
 @media screen and (min-width: 768px) {
   .header {
-    padding-right: 30px;
-    padding-left: 30px;
+    max-width: 708px;
   }
 }
 
 @media screen and (min-width: 1280px) {
   .header {
-    padding-right: 70px;
-    padding-left: 70px;
+    max-width: 1140px;
   }
 
   .header__logo-link {
