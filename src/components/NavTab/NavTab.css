@@ -25,6 +25,11 @@
   border-radius: 6px;
   width: 82px;
   height: 26px;
+  text-decoration: none;
+}
+
+.navtab__link:hover {
+  opacity: 0.8;
 }
 
 @media screen and (min-width: 768px) {
