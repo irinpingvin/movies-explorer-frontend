@@ -5,9 +5,15 @@ import Footer from "../Footer/Footer";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
+import { moviesList } from "../../utils/constants";
 
 function App() {
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = React.useState(false);
+  const [cards, setCards] = React.useState([]);
+
+  React.useEffect(() => {
+    setCards(moviesList);
+  }, []);
 
   function handleMenuClick() {
     setIsNavigationPopupOpen(true);
@@ -15,6 +21,14 @@ function App() {
 
   function closeNavigationPopup() {
     setIsNavigationPopupOpen(false);
+  }
+
+  function handleSearchRequest(searchRequest) {
+    // TODO
+  }
+
+  function handleCardSaved(card) {
+    // TODO
   }
 
   return (
@@ -32,7 +46,7 @@ function App() {
           <Route path="/movies" element={
             <>
               <Header isNavigationNeeded="true" onMenu={handleMenuClick}/>
-              <Movies/>
+              <Movies onSearchForm={handleSearchRequest} cards={cards} onCardSaved={handleCardSaved}/>
               <Footer/>
             </>
           }>

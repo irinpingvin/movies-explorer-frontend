@@ -1,8 +1,12 @@
 import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-function Movies() {
+function Movies(props) {
   return (
-    <SearchForm/>
+    <>
+      <SearchForm onSearchForm={props.onSearchForm}/>
+      <MoviesCardList cards={props.cards} onCardSaved={props.onCardSaved}/>
+    </>
   );
 }
 

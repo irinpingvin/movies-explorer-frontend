@@ -30,10 +30,30 @@
   line-height: 1.4;
   color: #A0A0A0;
   border: none;
+  outline: none;
   background: #F9F9F9;
-  width: 182px;
+  width: 220px;
   padding: 0;
   margin: 0 0 0 19px;
+}
+
+.search__input::-ms-clear {
+  display: none;
+  width : 0;
+  height: 0;
+}
+
+.search__input::-ms-reveal {
+  display: none;
+  width : 0;
+  height: 0;
+}
+
+.search__input::-webkit-search-decoration,
+.search__input::-webkit-search-cancel-button,
+.search__input::-webkit-search-results-button,
+.search__input::-webkit-search-results-decoration {
+  display: none;
 }
 
 .search__button {
