@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import Footer from "../Footer/Footer";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
 import Main from "../Main/Main";
+import Movies from "../Movies/Movies";
 
 function App() {
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = React.useState(false);
@@ -24,6 +25,14 @@ function App() {
             <>
               <Header isNavigationNeeded="true" onMenu={handleMenuClick}/>
               <Main/>
+              <Footer/>
+            </>
+          }>
+          </Route>
+          <Route path="/movies" element={
+            <>
+              <Header isNavigationNeeded="true" onMenu={handleMenuClick}/>
+              <Movies/>
               <Footer/>
             </>
           }>
