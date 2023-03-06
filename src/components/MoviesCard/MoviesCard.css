@@ -25,8 +25,7 @@
   height: 168px;
 }
 
-.movie__save-button {
-  background: url(../../images/movies__bookmark-icon.svg) no-repeat;
+.movie__button {
   background-size: 30px 30px;
   width: 30px;
   height: 30px;
@@ -38,13 +37,21 @@
   padding: 0;
 }
 
-.movie__save-button:hover {
+.movie__button:hover {
   opacity: 0.5;
   cursor: pointer;
 }
 
-.movie__save-button_saved {
+.movie__button_unsaved {
+  background: url(../../images/movies__bookmark-icon.svg) no-repeat;
+}
+
+.movie__button_saved {
   background: url(../../images/movie__saved-bookmark-icon.svg) no-repeat;
+}
+
+.movie__button_added {
+  background: url(../../images/movie__delete-button-icon.svg) no-repeat;
 }
 
 @media screen and (min-width: 768px) {

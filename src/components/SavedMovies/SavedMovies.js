@@ -3,15 +3,15 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import More from "../More/More";
 
-function Movies(props) {
+function SavedMovies(props) {
   return (
     <>
       <SearchForm onSearchForm={props.onSearchForm}/>
-      <MoviesCardList cards={props.cards} onCardSaved={props.onCardSaved} isSavedMode={false}/>
+      <MoviesCardList cards={props.cards} onCardSaved={props.onCardSaved} isSavedMode={true}/>
       {/*<Preloader/>*/}
       <More cards={props.cards}/>
     </>
   );
 }
 
-export default Movies;
+export default SavedMovies;

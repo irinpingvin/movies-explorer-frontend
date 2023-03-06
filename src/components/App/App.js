@@ -5,14 +5,17 @@ import Footer from "../Footer/Footer";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 import { moviesList } from "../../utils/constants";
 
 function App() {
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = React.useState(false);
   const [cards, setCards] = React.useState([]);
+  const [savedCards, setSavedCards] = React.useState([]);
 
   React.useEffect(() => {
     setCards(moviesList);
+    setSavedCards(moviesList);
   }, []);
 
   function handleMenuClick() {
@@ -45,8 +48,16 @@ function App() {
           </Route>
           <Route path="/movies" element={
             <>
-              <Header isNavigationNeeded="true" onMenu={handleMenuClick}/>
+              <Header isNavigationNeeded={true} onMenu={handleMenuClick}/>
               <Movies onSearchForm={handleSearchRequest} cards={cards} onCardSaved={handleCardSaved}/>
+              <Footer/>
+            </>
+          }>
+          </Route>
+          <Route path="/saved-movies" element={
+            <>
+              <Header isNavigationNeeded={true} onMenu={handleMenuClick}/>
+              <SavedMovies onSearchForm={handleSearchRequest} cards={savedCards} onCardSaved={handleCardSaved}/>
               <Footer/>
             </>
           }>
