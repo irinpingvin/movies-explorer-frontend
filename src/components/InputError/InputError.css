@@ -4,5 +4,6 @@
   font-size: 10px;
   line-height: 1.2;
   color: #FF3055;
-  margin: 6px 0 0;
+  margin: 6px 0;
+  max-height: 30px;
 }

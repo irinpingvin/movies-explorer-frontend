@@ -35,19 +35,19 @@ function Profile(props) {
 
   return (
     <div className="profile">
-      <h2 className="profile__title">Привет, Ирина</h2>
+      <h2 className="profile__title">Привет, Ирина!</h2>
       <SubmitForm isProfileMode={true} buttonText="Редактировать" onSubmitForm={handleSubmit}>
         <div className="profile__input-area">
           <p className="profile__input-title">Имя</p>
-          <input type="text" name="name-value" required className="profile__input-value"
-                 id="name" minLength="2" maxLength="30" value={name} onChange={handleNameChange}/>
+          <input type="text" name="profile-name" required className="profile__input-value"
+                 id="profile-name" minLength="2" maxLength="30" value={name} onChange={handleNameChange}/>
         </div>
         <InputError/>
         <div className="profile__border"></div>
         <div className="profile__input-area">
           <p className="profile__input-title">E-mail</p>
-          <input type="email" name="email-value" required className="profile__input-value"
-                 id="email" value={email} onChange={handleEmailChange}/>
+          <input type="email" name="profile-email" required className="profile__input-value"
+                 id="profile-email" value={email} onChange={handleEmailChange}/>
         </div>
         <InputError/>
       </SubmitForm>

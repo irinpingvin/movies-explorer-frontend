@@ -7,6 +7,7 @@ import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
+import Register from "../Register/Register";
 import { moviesList } from "../../utils/constants";
 
 function App() {
@@ -43,6 +44,10 @@ function App() {
     // TODO
   }
 
+  function handleRegister() {
+    // TODO
+  }
+
   return (
     <div className="app">
       <div className="app__container">
@@ -75,6 +80,13 @@ function App() {
             <>
               <Header isNavigationNeeded={true} onMenu={handleMenuClick}/>
               <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout}/>
+            </>
+          }>
+          </Route>
+          <Route path="/signup" element={
+            <>
+              <Header isNavigationNeeded={false} onRegister={handleRegister}/>
+              <Register/>
             </>
           }>
           </Route>

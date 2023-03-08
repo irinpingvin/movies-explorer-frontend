@@ -5,8 +5,8 @@ import Menu from "../Menu/Menu";
 
 function Header(props) {
   return (
-    <header className="header">
-      <div className="header__tabs">
+    <header className={`header ${props.isNavigationNeeded ? 'header_type_with-navigation' : ''}`}>
+      <div className={`header__tabs ${props.isNavigationNeeded ? 'header__tabs_type_with-navigation' : ''}`}>
         <Link className="header__logo-link" to="/"></Link>
         { props.isNavigationNeeded ? (
           <>

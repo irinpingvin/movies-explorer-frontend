@@ -1,11 +1,19 @@
 .header {
-  padding: 18px 0;
+  padding: 56px 0 50px;
   margin: 0 auto;
   max-width: 292px;
 }
 
+.header_type_with-navigation {
+  padding: 18px 0;
+}
+
 .header__tabs {
   display: flex;
+  justify-content: center;
+}
+
+.header__tabs_type_with-navigation {
   justify-content: space-between;
 }
 
@@ -19,12 +27,25 @@
 
 @media screen and (min-width: 768px) {
   .header {
+    max-width: 396px;
+    padding: 22vh 0 3vh;
+  }
+
+  .header_type_with-navigation {
     max-width: 708px;
+  }
+
+  .header__tabs {
+    justify-content: flex-start;
   }
 }
 
 @media screen and (min-width: 1280px) {
   .header {
+    padding: 70px 0 40px;
+  }
+
+  .header_type_with-navigation {
     max-width: 1140px;
   }
 
