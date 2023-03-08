@@ -6,6 +6,7 @@ import NavigationPopup from "../NavigationPopup/NavigationPopup";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
 import { moviesList } from "../../utils/constants";
 
 function App() {
@@ -34,6 +35,14 @@ function App() {
     // TODO
   }
 
+  function handleChangeUserInfo(userInfo) {
+    // TODO
+  }
+
+  function handleSignout() {
+    // TODO
+  }
+
   return (
     <div className="app">
       <div className="app__container">
@@ -59,6 +68,13 @@ function App() {
               <Header isNavigationNeeded={true} onMenu={handleMenuClick}/>
               <SavedMovies onSearchForm={handleSearchRequest} cards={savedCards} onCardSaved={handleCardSaved}/>
               <Footer/>
+            </>
+          }>
+          </Route>
+          <Route path="/profile" element={
+            <>
+              <Header isNavigationNeeded={true} onMenu={handleMenuClick}/>
+              <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout}/>
             </>
           }>
           </Route>
