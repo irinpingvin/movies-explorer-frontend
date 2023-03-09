@@ -8,6 +8,7 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
+import Login from "../Login/Login";
 import { moviesList } from "../../utils/constants";
 
 function App() {
@@ -44,7 +45,11 @@ function App() {
     // TODO
   }
 
-  function handleRegister() {
+  function handleRegister(userData) {
+    // TODO
+  }
+
+  function handleLogin(userData) {
     // TODO
   }
 
@@ -85,8 +90,15 @@ function App() {
           </Route>
           <Route path="/signup" element={
             <>
-              <Header isNavigationNeeded={false} onRegister={handleRegister}/>
-              <Register/>
+              <Header isNavigationNeeded={false}/>
+              <Register onRegister={handleRegister}/>
+            </>
+          }>
+          </Route>
+          <Route path="/signin" element={
+            <>
+              <Header isNavigationNeeded={false}/>
+              <Login onLogin={handleLogin}/>
             </>
           }>
           </Route>

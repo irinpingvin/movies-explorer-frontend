@@ -59,7 +59,7 @@ function Register(props) {
         <InputError/>
       </SubmitForm>
       <p className="register__auth-caption">Уже зарегистрированы?&nbsp;
-        <Link className="register__auth-link" to="/sign-in">Войти</Link>
+        <Link className="register__auth-link" to="/signin">Войти</Link>
       </p>
     </div>
   );
