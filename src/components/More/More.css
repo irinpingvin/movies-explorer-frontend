@@ -16,11 +16,11 @@
   line-height: 1.25;
   color: #000000;
   background: #FFFFFF;
-  cursor: pointer;
 }
 
 .more-button:hover {
-  opacity: 0.6;
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {

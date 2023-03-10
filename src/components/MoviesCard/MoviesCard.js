@@ -1,6 +1,9 @@
+import React from "react";
+
 function MoviesCard({ card, onCardSaved, isSavedMode }) {
-  const isCardSaved = false;
+  const [isCardSaved, setIsCardSaved] = React.useState(false);
   let cardSaveButtonClassName;
+
   if (isSavedMode) {
     cardSaveButtonClassName = 'movie__button movie__button_added';
   } else {
@@ -9,6 +12,9 @@ function MoviesCard({ card, onCardSaved, isSavedMode }) {
 
   function handleSave() {
     onCardSaved(card);
+    if (!isSavedMode) {
+      setIsCardSaved(!isCardSaved);
+    }
   }
 
   return (

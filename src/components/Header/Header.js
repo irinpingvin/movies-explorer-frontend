@@ -10,7 +10,7 @@ function Header(props) {
         <Link className="header__logo-link" to="/"></Link>
         { props.isNavigationNeeded ? (
           <>
-            <Navigation/>
+            <Navigation loggedIn={props.loggedIn}/>
             <Menu onMenuClick={props.onMenu}/>
           </>
         ) : null }

@@ -19,9 +19,6 @@
 }
 
 .portfolio__navigation-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin: 0 0 19px;
 }
 
@@ -39,6 +36,17 @@
 }
 
 .portfolio__navigation-link {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.portfolio__navigation-link:hover {
+  opacity: 0.6;
+}
+
+.portfolio__navigation-image {
   background: url(../../images/portfolio__navigation-link.svg) no-repeat;
   background-size: 18px 28px;
   width: 18px;
@@ -73,7 +81,7 @@
     line-height: 1.8;
   }
 
-  .portfolio__navigation-link {
+  .portfolio__navigation-image {
     background-size: 27px 60px;
     width: 27px;
     height: 60px;
@@ -94,7 +102,7 @@
     line-height: 1.7;
   }
 
-  .portfolio__navigation-link {
+  .portfolio__navigation-image {
     background-size: 29px 60px;
     width: 29px;
   }

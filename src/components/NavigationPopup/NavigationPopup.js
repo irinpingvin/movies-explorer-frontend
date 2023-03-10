@@ -10,17 +10,17 @@ function NavigationPopup(props) {
           <nav>
             <ul className="popup__navigation-links">
               <li className="popup__navigation-item">
-                <Link className="popup__navigation-link" to="/">Главная</Link>
+                <Link className="popup__navigation-link" to="/" onClick={props.onClose}>Главная</Link>
               </li>
               <li className="popup__navigation-item">
-                <Link className="popup__navigation-link" to="/movies">Фильмы</Link>
+                <Link className="popup__navigation-link" to="/movies" onClick={props.onClose}>Фильмы</Link>
               </li>
               <li className="popup__navigation-item">
-                <Link className="popup__navigation-link" to="/saved-movies">Сохранённые фильмы</Link>
+                <Link className="popup__navigation-link" to="/saved-movies" onClick={props.onClose}>Сохранённые фильмы</Link>
               </li>
             </ul>
           </nav>
-          <ProfileLink/>
+          <ProfileLink onClose={props.onClose}/>
         </div>
       </div>
     </div>

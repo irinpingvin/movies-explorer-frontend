@@ -11,15 +11,26 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import { moviesList } from "../../utils/constants";
+import { CurrentUserContext } from "../../contexts/currentUser/CurrentUserContext";
 
 function App() {
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = React.useState(false);
   const [cards, setCards] = React.useState([]);
   const [savedCards, setSavedCards] = React.useState([]);
+  const [currentUser, setCurrentUser] = React.useState({
+    name: '',
+    email: ''
+  });
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
     setCards(moviesList);
     setSavedCards(moviesList);
+    setCurrentUser({
+      name: "Irina",
+      email: "test@mail.ru"
+    });
+    setLoggedIn(true);
   }, []);
 
   function handleMenuClick() {
@@ -31,83 +42,79 @@ function App() {
   }
 
   function handleSearchRequest(searchRequest) {
-    // TODO
   }
 
   function handleCardSaved(card) {
-    // TODO
   }
 
   function handleChangeUserInfo(userInfo) {
-    // TODO
   }
 
   function handleSignout() {
-    // TODO
   }
 
   function handleRegister(userData) {
-    // TODO
   }
 
   function handleLogin(userData) {
-    // TODO
   }
 
   return (
-    <div className="app">
-      <div className="app__container">
-        <Routes>
-          <Route exact path="/" element={
-            <>
-              <Header isNavigationNeeded="true" onMenu={handleMenuClick}/>
-              <Main/>
-              <Footer/>
-            </>
-          }>
-          </Route>
-          <Route path="/movies" element={
-            <>
-              <Header isNavigationNeeded={true} onMenu={handleMenuClick}/>
-              <Movies onSearchForm={handleSearchRequest} cards={cards} onCardSaved={handleCardSaved}/>
-              <Footer/>
-            </>
-          }>
-          </Route>
-          <Route path="/saved-movies" element={
-            <>
-              <Header isNavigationNeeded={true} onMenu={handleMenuClick}/>
-              <SavedMovies onSearchForm={handleSearchRequest} cards={savedCards} onCardSaved={handleCardSaved}/>
-              <Footer/>
-            </>
-          }>
-          </Route>
-          <Route path="/profile" element={
-            <>
-              <Header isNavigationNeeded={true} onMenu={handleMenuClick}/>
-              <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout}/>
-            </>
-          }>
-          </Route>
-          <Route path="/signup" element={
-            <>
-              <Header isNavigationNeeded={false}/>
-              <Register onRegister={handleRegister}/>
-            </>
-          }>
-          </Route>
-          <Route path="/signin" element={
-            <>
-              <Header isNavigationNeeded={false}/>
-              <Login onLogin={handleLogin}/>
-            </>
-          }>
-          </Route>
-          <Route path="*" element={<PageNotFound/>} />
-        </Routes>
-        <NavigationPopup isOpen={isNavigationPopupOpen} onClose={closeNavigationPopup}/>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">
+        <div className="app__container">
+          <Routes>
+            <Route exact path="/" element={
+              <>
+                <Header isNavigationNeeded="true" loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                <Main/>
+                <Footer/>
+              </>
+            }>
+            </Route>
+            <Route path="/movies" element={
+              <>
+                <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                <Movies onSearchForm={handleSearchRequest} cards={cards} onCardSaved={handleCardSaved}/>
+                <Footer/>
+              </>
+            }>
+            </Route>
+            <Route path="/saved-movies" element={
+              <>
+                <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                <SavedMovies onSearchForm={handleSearchRequest} cards={savedCards} onCardSaved={handleCardSaved}/>
+                <Footer/>
+              </>
+            }>
+            </Route>
+            <Route path="/profile" element={
+              <>
+                <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout}/>
+              </>
+            }>
+            </Route>
+            <Route path="/signup" element={
+              <>
+                <Header isNavigationNeeded={false} loggedIn={loggedIn}/>
+                <Register onRegister={handleRegister}/>
+              </>
+            }>
+            </Route>
+            <Route path="/signin" element={
+              <>
+                <Header isNavigationNeeded={false} loggedIn={loggedIn}/>
+                <Login onLogin={handleLogin}/>
+              </>
+            }>
+            </Route>
+            <Route path="*" element={<PageNotFound/>} />
+          </Routes>
+          <NavigationPopup isOpen={isNavigationPopupOpen} onClose={closeNavigationPopup}/>
+        </div>
       </div>
-    </div>
+    </CurrentUserContext.Provider>
   );
 }
 

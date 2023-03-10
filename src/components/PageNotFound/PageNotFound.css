@@ -22,7 +22,7 @@
   margin: 0 0 30vh;
 }
 
-.not-found__button {
+.not-found__link {
   font-weight: 400;
   font-size: 12px;
   line-height: 1.25;
@@ -32,9 +32,8 @@
   text-decoration: none;
 }
 
-.not-found__button:hover {
+.not-found__link:hover {
   opacity: 0.6;
-  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
@@ -49,7 +48,7 @@
     margin-bottom: 17vh;
   }
 
-  .not-found__button {
+  .not-found__link {
     font-size: 14px;
     line-height: 1.2;
   }

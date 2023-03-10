@@ -1,19 +1,19 @@
-.navtab {
+.nav-tab {
   display: flex;
   list-style: none;
   padding-inline-start: 0;
   margin: 0 0 17px;
 }
 
-.navtab__item {
+.nav-tab__item {
   margin: 0 6px 0 0;
 }
 
-.navtab__item:last-child {
+.nav-tab__item:last-child {
   margin: 0;
 }
 
-.navtab__link {
+.nav-tab__link {
   font-weight: 500;
   font-size: 10px;
   line-height: 1.6;
@@ -28,20 +28,20 @@
   text-decoration: none;
 }
 
-.navtab__link:hover {
-  opacity: 0.8;
+.nav-tab__link:hover {
+  opacity: 0.6;
 }
 
 @media screen and (min-width: 768px) {
-  .navtab {
+  .nav-tab {
     margin-bottom: 30px;
   }
 
-  .navtab__item {
+  .nav-tab__item {
     margin-right: 10px;
   }
 
-  .navtab__link {
+  .nav-tab__link {
     font-size: 12px;
     line-height: 1.3;
     border-radius: 10px;

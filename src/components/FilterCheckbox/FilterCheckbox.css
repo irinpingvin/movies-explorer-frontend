@@ -30,6 +30,10 @@
   display: inline-block;
 }
 
+.filter__visible-checkbox:hover {
+  opacity: 0.8;
+}
+
 .filter__invisible-checkbox:checked + .filter__visible-checkbox {
   background: #EBEBEB;
 }

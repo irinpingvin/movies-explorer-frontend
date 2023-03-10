@@ -1,21 +1,18 @@
 import React from "react";
 import SubmitForm from "../SubmitForm/SubmitForm";
 import InputError from "../InputError/InputError";
+import { Link } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/currentUser/CurrentUserContext";
 
 function Profile(props) {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
-  // TODO
-/*
-  const currentUserContext = React.useContext(CurrentUserContext);
-*/
+  const userInfo = React.useContext(CurrentUserContext);
 
-/*
   React.useEffect(() => {
-    setName(currentUserContext.name);
-    setEmail(currentUserContext.email);
-  }, [])
-*/
+    setName(userInfo.name);
+    setEmail(userInfo.email);
+  }, [userInfo]);
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -51,7 +48,7 @@ function Profile(props) {
         </div>
         <InputError/>
       </SubmitForm>
-      <button className="profile__signout-button" onClick={props.onSignoutClick}>Выйти из аккаунта</button>
+      <Link className="profile__signout-link" to="/" onClick={props.onSignoutClick}>Выйти из аккаунта</Link>
     </div>
   );
 }

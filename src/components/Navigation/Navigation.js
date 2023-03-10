@@ -3,13 +3,10 @@ import ProfileLink from "../ProfileLink/ProfileLink";
 import AuthLinks from "../AuthLinks/AuthLinks";
 import ContentLinks from "../ContentLinks/ContentLinks";
 
-function Navigation() {
-  // TODO
-  const isLoggedIn = true;
-
+function Navigation(props) {
   return(
     <>
-      { isLoggedIn ? (
+      { props.loggedIn ? (
         <div className="navigation">
           <ContentLinks/>
           <ProfileLink/>

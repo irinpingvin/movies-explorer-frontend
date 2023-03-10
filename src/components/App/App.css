@@ -2,6 +2,8 @@
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   background-color: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .app__container {

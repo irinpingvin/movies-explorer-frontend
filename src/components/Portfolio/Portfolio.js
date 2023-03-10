@@ -5,18 +5,24 @@ function Portfolio() {
       <nav>
         <ul className="portfolio__navigation">
           <li className="portfolio__navigation-item">
-            <p className="portfolio__navigation-title">Статичный сайт</p>
-            <a className="portfolio__navigation-link" href="https://github.com/irinpingvin/how-to-learn" target="_blank"></a>
+            <a className="portfolio__navigation-link" href="https://github.com/irinpingvin/how-to-learn" target="_blank" rel='noreferrer'>
+              <p className="portfolio__navigation-title">Статичный сайт</p>
+              <div className="portfolio__navigation-image"></div>
+            </a>
           </li>
           <div className="portfolio__navigation-border"></div>
           <li className="portfolio__navigation-item">
-            <p className="portfolio__navigation-title">Адаптивный сайт</p>
-            <a className="portfolio__navigation-link" href="https://github.com/irinpingvin/russian-travel" target="_blank"></a>
+            <a className="portfolio__navigation-link" href="https://github.com/irinpingvin/russian-travel" target="_blank" rel='noreferrer'>
+              <p className="portfolio__navigation-title">Адаптивный сайт</p>
+              <div className="portfolio__navigation-image"></div>
+            </a>
           </li>
           <div className="portfolio__navigation-border"></div>
           <li className="portfolio__navigation-item">
-            <p className="portfolio__navigation-title">Одностраничное приложение</p>
-            <a className="portfolio__navigation-link" href="https://github.com/irinpingvin/react-mesto-api-full" target="_blank"></a>
+            <a className="portfolio__navigation-link" href="https://github.com/irinpingvin/react-mesto-api-full" target="_blank" rel='noreferrer'>
+              <p className="portfolio__navigation-title">Одностраничное приложение</p>
+              <div className="portfolio__navigation-image"></div>
+            </a>
           </li>
         </ul>
       </nav>

@@ -25,6 +25,10 @@
   border: none;
 }
 
+.header__logo-link:hover {
+  opacity: 0.8;
+}
+
 @media screen and (min-width: 768px) {
   .header {
     max-width: 396px;
@@ -33,10 +37,15 @@
 
   .header_type_with-navigation {
     max-width: 708px;
+    padding: 18px 0;
   }
 
   .header__tabs {
     justify-content: flex-start;
+  }
+
+  .header__tabs_type_with-navigation {
+    justify-content: space-between;
   }
 }
 

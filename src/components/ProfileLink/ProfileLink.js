@@ -1,9 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-function ProfileLink() {
+function ProfileLink(props) {
   return (
-    <Link className="profile-link" to="/profile">Аккаунт</Link>
+    <Link className="profile-link" to="/profile" onClick={props.onClose}>Аккаунт</Link>
   );
 }
 

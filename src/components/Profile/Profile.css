@@ -1,6 +1,9 @@
 .profile {
   margin: 0 auto;
   max-width: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .profile__title {
@@ -42,22 +45,19 @@
   margin: 16px 0 17px;
 }
 
-.profile__signout-button {
+.profile__signout-link {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.25;
   text-align: center;
   color: #FF3055;
-  border: none;
-  background: #FFFFFF;
+  text-decoration: none;
   padding: 0;
-  width: 260px;
-  margin: 0 auto 40px;
+  margin: 0 0 40px;
 }
 
-.profile__signout-button:hover {
-  opacity: 0.8;
-  cursor: pointer;
+.profile__signout-link:hover {
+  opacity: 0.6;
 }
 
 @media screen and (min-width: 768px) {
@@ -73,8 +73,7 @@
     width: 122px;
   }
 
-  .profile__signout-button {
-    width: 410px;
+  .profile__signout-link {
     margin-bottom: 269px;
     font-size: 13px;
     line-height: 1.2;
@@ -86,7 +85,7 @@
     margin: 74px 0 123px;
   }
 
-  .profile__signout-button {
+  .profile__signout-link {
     margin-bottom: 70px;
   }
 }
