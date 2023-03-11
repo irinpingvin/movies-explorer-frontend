@@ -10,7 +10,7 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import { moviesList } from "../../utils/constants";
+import { moviesList, savedMoviesList } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/currentUser/CurrentUserContext";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
 
   React.useEffect(() => {
     setCards(moviesList);
-    setSavedCards(moviesList);
+    setSavedCards(savedMoviesList);
     setCurrentUser({
       name: "Irina",
       email: "test@mail.ru"

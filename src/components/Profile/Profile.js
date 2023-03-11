@@ -32,8 +32,8 @@ function Profile(props) {
 
   return (
     <div className="profile">
-      <h2 className="profile__title">Привет, Ирина!</h2>
-      <SubmitForm isProfileMode={true} buttonText="Редактировать" onSubmitForm={handleSubmit}>
+      <h2 className="profile__title">Привет, {name}!</h2>
+      <SubmitForm buttonText="Редактировать" onSubmitForm={handleSubmit}>
         <div className="profile__input-area">
           <p className="profile__input-title">Имя</p>
           <input type="text" name="profile-name" required className="profile__input-value"

@@ -48,9 +48,9 @@
 
 .portfolio__navigation-image {
   background: url(../../images/portfolio__navigation-link.svg) no-repeat;
-  background-size: 18px 28px;
-  width: 18px;
-  height: 28px;
+  background-size: 11px 11px;
+  width: 11px;
+  height: 11px;
   border: none;
 }
 
@@ -82,9 +82,9 @@
   }
 
   .portfolio__navigation-image {
-    background-size: 27px 60px;
-    width: 27px;
-    height: 60px;
+    background-size: 18px 28px;
+    width: 18px;
+    height: 28px;
   }
 }
 
@@ -99,11 +99,6 @@
 
   .portfolio__navigation-title {
     font-size: 30px;
-    line-height: 1.7;
-  }
-
-  .portfolio__navigation-image {
-    background-size: 29px 60px;
-    width: 29px;
+    line-height: 1.6;
   }
 }

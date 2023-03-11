@@ -38,7 +38,7 @@ function Register(props) {
   return (
     <div className="register">
       <h2 className="register__title">Добро пожаловать!</h2>
-      <SubmitForm isProfileMode={false} buttonText="Зарегистрироваться" onSubmitForm={handleSubmit}>
+      <SubmitForm buttonText="Зарегистрироваться" onSubmitForm={handleSubmit}>
         <div className="register__input-area">
           <p className="register__input-title">Имя</p>
           <input type="text" name="register-name" required className="register__input-value"

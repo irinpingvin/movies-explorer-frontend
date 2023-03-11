@@ -1,6 +1,7 @@
 .movies {
   margin: 0 auto;
   max-width: 300px;
+  padding: 40px 0 30px;
 }
 
 .movies-list {
@@ -9,12 +10,13 @@
   display: grid;
   grid-template-columns: 300px;
   gap: 16px;
-  margin: 40px 0 30px;
+  margin: 0;
 }
 
 @media screen and (min-width: 768px) {
   .movies {
     max-width: 708px;
+    padding-top: 70px;
   }
 
   .movies-list {

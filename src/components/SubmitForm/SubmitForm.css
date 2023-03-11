@@ -12,7 +12,13 @@
   width: 260px;
   height: 45px;
   border: none;
-  margin: 8vh 0 14px;
+  margin: 0 0 14px;
+  padding: 0;
+}
+
+.submit__form-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .submit__form-button_type_profile {
@@ -20,11 +26,15 @@
   color: #000000;
   background: #FFFFFF;
   height: 15px;
+  margin-top: 377px;
 }
 
-.submit__form-button:hover {
-  opacity: 0.8;
-  cursor: pointer;
+.submit__form-button_type_register {
+  margin-top: 220px;
+}
+
+.submit__form-button_type_login {
+  margin-top: 310px;
 }
 
 @media screen and (min-width: 768px) {
@@ -33,6 +43,14 @@
     line-height: 1.2;
     background-size: 396px 45px;
     width: 396px;
+  }
+
+  .submit__form-button_type_register {
+    margin-top: 132px;
+  }
+
+  .submit__form-button_type_login {
+    margin-top: 222px;
   }
 
   .submit__form-button_type_profile {
@@ -44,6 +62,6 @@
 
 @media screen and (min-width: 1280px) {
   .submit__form-button_type_profile {
-    margin-top: 220px;
+    margin-top: 222px;
   }
 }

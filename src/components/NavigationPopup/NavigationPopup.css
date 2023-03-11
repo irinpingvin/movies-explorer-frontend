@@ -20,18 +20,17 @@
 .popup__container {
   position: relative;
   width: 100%;
-  padding: 0 10px;
   background-color: #FFFFFF;
 }
 
 .popup__close-button {
   background: url(../../images/popup__close-button.svg) no-repeat;
-  background-size: 22px 22px;
+  background-size: 33px 33px;
   position: absolute;
   right: 13px;
   top: 13px;
-  width: 22px;
-  height: 22px;
+  width: 33px;
+  height: 33px;
   box-shadow: none;
   border: none;
   padding: 0;
@@ -51,7 +50,7 @@
 }
 
 .popup__navigation-links {
-  margin: 18vh 0 50vh;
+  margin: 144px 0 444px;
   list-style: none;
   padding-inline-start: 0;
   align-items: center;
@@ -81,6 +80,14 @@
 @media screen and (min-width: 520px) {
   .popup__container {
     width: 520px;
+  }
+
+  .popup__navigation-links {
+    margin: 159px 0 621px;
+  }
+
+  .popup__navigation-item {
+    margin-bottom: 28px;
   }
 
   .popup__close-button {

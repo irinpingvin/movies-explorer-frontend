@@ -9,11 +9,17 @@
   line-height: 1.2;
   text-align: center;
   color: #000000;
+  margin: 0 0 80px;
 }
 
 .login__input-area {
   display: flex;
   flex-direction: column;
+  margin: 0 0 24px;
+}
+
+.login__input-area:last-of-type {
+  margin: 0;
 }
 
 .login__input-title {
@@ -50,6 +56,7 @@
   font-size: 12px;
   line-height: 1.25;
   color: #3456F3;
+  text-decoration: none;
 }
 
 .login__auth-link:hover {

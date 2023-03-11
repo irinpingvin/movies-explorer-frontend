@@ -1,4 +1,4 @@
-.filter{
+.filter {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +48,7 @@
   top: 2px;
   right: 2px;
   background: #FFFFFF;
-  transition: 0.4s;
+  transition: 0.6s;
 }
 
 .filter__invisible-checkbox:checked + .filter__visible-checkbox::before {
@@ -67,7 +67,7 @@
 @media screen and (min-width: 768px) {
   .filter {
     background: #F9F9F9;
-    width: 188px;
+    width: 197px;
     height: 72px;
     border-top-right-radius: 9px;
     border-bottom-right-radius: 9px;

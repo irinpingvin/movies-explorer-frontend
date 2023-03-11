@@ -10,7 +10,7 @@
   line-height: 1.2;
   text-align: center;
   color: #000000;
-  margin: 40vh 0 10px;
+  margin: 329px 0 10px;
 }
 
 .not-found__subtitle {
@@ -19,7 +19,7 @@
   line-height: 1.25;
   text-align: center;
   color: #000000;
-  margin: 0 0 30vh;
+  margin: 0 0 284px;
 }
 
 .not-found__link {
@@ -39,17 +39,24 @@
 @media screen and (min-width: 768px) {
   .not-found__title {
     font-size: 140px;
+    margin-top: 408px;
     margin-bottom: 5px;
   }
 
   .not-found__subtitle {
     font-size: 16px;
     line-height: 1.2;
-    margin-bottom: 17vh;
+    margin-bottom: 186px;
   }
 
   .not-found__link {
     font-size: 14px;
     line-height: 1.2;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .not-found__title {
+    margin-top: 246px;
   }
 }

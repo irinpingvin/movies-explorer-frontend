@@ -37,6 +37,7 @@
   object-position: top;
   grid-area: about-me__photo;
   margin: 0 0 40px;
+  border-radius: 10px;
 }
 
 .about-me__name {
@@ -75,6 +76,7 @@
   color: #000000;
   grid-area: about-me__link;
   margin: 0 0 70px;
+  text-decoration: none;
 }
 
 .about-me__link:hover {
@@ -124,6 +126,7 @@
 
   .about-me__description {
     font-size: 12px;
+    line-height: 1.5;
     margin-bottom: 87px;
   }
 
