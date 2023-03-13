@@ -36,7 +36,7 @@ function Register(props) {
   }
 
   return (
-    <div className="register">
+    <main className="register">
       <h2 className="register__title">Добро пожаловать!</h2>
       <SubmitForm buttonText="Зарегистрироваться" onSubmitForm={handleSubmit}>
         <div className="register__input-area">
@@ -61,7 +61,7 @@ function Register(props) {
       <p className="register__auth-caption">Уже зарегистрированы?&nbsp;
         <Link className="register__auth-link" to="/signin">Войти</Link>
       </p>
-    </div>
+    </main>
   );
 }
 

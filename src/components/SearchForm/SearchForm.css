@@ -37,6 +37,10 @@
   margin: 0 46px 0 19px;
 }
 
+.search__input:focus {
+  border-bottom: 1px solid rgba(52, 86, 243, 1);
+}
+
 .search__button {
   background: url(../../images/search__button.svg) no-repeat;
   background-size: 34px 34px;

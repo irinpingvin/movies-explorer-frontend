@@ -31,7 +31,7 @@ function Profile(props) {
   }
 
   return (
-    <div className="profile">
+    <main className="profile">
       <h2 className="profile__title">Привет, {name}!</h2>
       <SubmitForm buttonText="Редактировать" onSubmitForm={handleSubmit}>
         <div className="profile__input-area">
@@ -49,7 +49,7 @@ function Profile(props) {
         <InputError/>
       </SubmitForm>
       <Link className="profile__signout-link" to="/" onClick={props.onSignoutClick}>Выйти из аккаунта</Link>
-    </div>
+    </main>
   );
 }
 

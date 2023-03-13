@@ -35,9 +35,13 @@
   line-height: 1.2;
   text-align: right;
   color: #000000;
-  width: 120px;
+  width: 200px;
   border: none;
   outline: none;
+}
+
+.profile__input-value:focus {
+  border-bottom: 1px solid rgba(52, 86, 243, 1);
 }
 
 .profile__border {
@@ -71,7 +75,7 @@
   }
 
   .profile__input-value {
-    width: 122px;
+    width: 360px;
   }
 
   .profile__border {

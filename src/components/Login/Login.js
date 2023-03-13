@@ -29,7 +29,7 @@ function Login(props) {
   }
 
   return (
-    <div className="login">
+    <main className="login">
       <h2 className="login__title">Рады видеть!</h2>
       <SubmitForm buttonText="Войти" onSubmitForm={handleSubmit}>
         <div className="login__input-area">
@@ -48,7 +48,7 @@ function Login(props) {
       <p className="login__auth-caption">Ещё не зарегистрированы?&nbsp;
         <Link className="login__auth-link" to="/signup">Регистрация</Link>
       </p>
-    </div>
+    </main>
   );
 }
 
