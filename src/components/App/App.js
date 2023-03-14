@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Header from '../Header/Header';
 import Footer from "../Footer/Footer";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
@@ -25,6 +25,7 @@ function App() {
     email: ''
   });
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     setSavedMovies(savedMoviesList);
@@ -77,6 +78,18 @@ function App() {
   }
 
   function handleLogin(userData) {
+    if (!userData.password || !userData.email)
+      return;
+
+    mainApi.signIn(userData)
+      .then(res => {
+        if (res.token) {
+          localStorage.setItem('jwt', res.token);
+          setLoggedIn(true);
+          navigate('/');
+        }
+      })
+      .catch(error => console.log(error));
   }
 
   return (

@@ -15,7 +15,16 @@ class MainApi {
         return response.json();
       }
       return Promise.reject(`Ошибка: ${response.status}`)
-    })
+    });
+  }
+
+  signIn(userData) {
+    return this.#handleServerResponse(fetch(`${this.#baseurl}/signin`, {
+      method: 'POST',
+      headers: this.#headers,
+      credentials: 'include',
+      body: JSON.stringify(userData)
+    }));
   }
 
   saveMovie(movieInfo) {
@@ -23,9 +32,9 @@ class MainApi {
       method: 'POST',
       headers: this.#headers,
       credentials: 'include',
-      body:JSON.stringify(movieInfo)
+      body: JSON.stringify(movieInfo)
     }));
-  }
+  };
 }
 
 export const mainApi = new MainApi(MAIN_API_URL, HEADERS);
