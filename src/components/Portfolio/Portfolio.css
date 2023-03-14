@@ -19,11 +19,14 @@
 }
 
 .portfolio__navigation-item {
-  margin: 0 0 19px;
+  padding-bottom: 19px;
+  border-bottom: 1px solid rgba(230, 230, 230, 1);
+  margin: 0 0 20px;
 }
 
 .portfolio__navigation-item:last-child {
   margin: 0;
+  border: none;
 }
 
 .portfolio__navigation-title {
@@ -52,13 +55,6 @@
   width: 11px;
   height: 11px;
   border: none;
-}
-
-.portfolio__navigation-border {
-  border-bottom: 1px solid rgba(230, 230, 230, 1);
-  height: 1px;
-  width: 100%;
-  margin: 0 0 20px;
 }
 
 @media screen and (min-width: 768px) {

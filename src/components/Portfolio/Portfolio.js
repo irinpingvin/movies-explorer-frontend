@@ -10,14 +10,12 @@ function Portfolio() {
               <div className="portfolio__navigation-image"></div>
             </a>
           </li>
-          <div className="portfolio__navigation-border"></div>
           <li className="portfolio__navigation-item">
             <a className="portfolio__navigation-link" href="https://github.com/irinpingvin/russian-travel" target="_blank" rel='noreferrer'>
               <p className="portfolio__navigation-title">Адаптивный сайт</p>
               <div className="portfolio__navigation-image"></div>
             </a>
           </li>
-          <div className="portfolio__navigation-border"></div>
           <li className="portfolio__navigation-item">
             <a className="portfolio__navigation-link" href="https://github.com/irinpingvin/react-mesto-api-full" target="_blank" rel='noreferrer'>
               <p className="portfolio__navigation-title">Одностраничное приложение</p>
