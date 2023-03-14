@@ -1,7 +1,7 @@
 import React from "react";
 
-function MoviesCard({ card, onCardSaved, isSavedMode }) {
-  const [isCardSaved, setIsCardSaved] = React.useState(false);
+function MoviesCard({ card, savedCards, onCardSave, isSavedMode }) {
+  const isCardSaved = savedCards.some(element => element.movieId === card.id);
   let cardSaveButtonClassName;
   const movieDuration = getMovieDurationInHours();
 
@@ -12,10 +12,19 @@ function MoviesCard({ card, onCardSaved, isSavedMode }) {
   }
 
   function handleSave() {
-    onCardSaved(card);
-    if (!isSavedMode) {
-      setIsCardSaved(!isCardSaved);
-    }
+    onCardSave({
+      nameRU: card.nameRU,
+      country: card.country,
+      director: card.director,
+      duration: card.duration,
+      year: card.year,
+      description: card.description,
+      image: card.image.url,
+      trailerLink: card.trailerLink,
+      nameEN: card.nameEN,
+      thumbnail: card.image.formats.thumbnail.url,
+      movieId: card.id,
+    });
   }
 
   function getMovieDurationInHours() {

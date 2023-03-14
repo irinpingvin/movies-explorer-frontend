@@ -6,8 +6,8 @@ function Movies(props) {
   return (
     <main className="page-movies">
       <SearchForm onSearchForm={props.onSearchForm}/>
-      <MoviesCardList cards={props.cards} onCardSaved={props.onCardSaved} isSavedMode={false}/>
-      <More cards={props.cards}/>
+      <MoviesCardList movies={props.movies} savedMovies={props.savedMovies} onMovieSave={props.onMovieSave} isSavedMode={false}/>
+      <More cards={props.movies}/>
     </main>
   );
 }

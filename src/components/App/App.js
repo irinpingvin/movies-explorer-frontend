@@ -13,12 +13,13 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import { savedMoviesList } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/currentUser/CurrentUserContext";
 import {moviesApi} from "../../utils/MoviesApi";
+import {mainApi} from "../../utils/MainApi";
 import {moviesFilter} from "../../utils/MoviesFilter";
 
 function App() {
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = React.useState(false);
-  const [cards, setCards] = React.useState([]);
-  const [savedCards, setSavedCards] = React.useState([]);
+  const [movies, setMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({
     name: '',
     email: ''
@@ -26,13 +27,13 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
-    setSavedCards(savedMoviesList);
+    setSavedMovies(savedMoviesList);
     setCurrentUser({
       name: "Irina",
       email: "test@mail.ru"
     });
     setLoggedIn(true);
-  }, [cards]);
+  }, [movies]);
 
   function handleMenuClick() {
     setIsNavigationPopupOpen(true);
@@ -42,15 +43,28 @@ function App() {
     setIsNavigationPopupOpen(false);
   }
 
-  function handleSearchRequest(searchRequest) {
+  function handleMoviesSearch(searchRequest) {
     moviesApi.getMovies()
       .then(movies => {
-        setCards(moviesFilter.getFilteredMovies(movies, searchRequest, true));
+        setMovies(moviesFilter.getFilteredMovies(movies, searchRequest, true));
       })
       .catch(error => console.log(error));
   }
 
-  function handleCardSaved(card) {
+  function handleSavedMoviesSearch(searchRequest) {
+
+  }
+
+  function handleMovieSaving(movieInfo) {
+    const isMovieSaved = savedMovies.some(element => element.movieId === movieInfo.movieId);
+
+    if (!isMovieSaved) {
+      mainApi.saveMovie(movieInfo)
+        .then(movie => {
+          setSavedMovies(savedMovies.add(movie));
+        })
+        .catch(error => console.log(error));
+    }
   }
 
   function handleChangeUserInfo(userInfo) {
@@ -81,7 +95,7 @@ function App() {
             <Route path="/movies" element={
               <>
                 <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <Movies onSearchForm={handleSearchRequest} cards={cards} onCardSaved={handleCardSaved}/>
+                <Movies onSearchForm={handleMoviesSearch} movies={movies} savedMovies={savedMovies} onMovieSave={handleMovieSaving}/>
                 <Footer/>
               </>
             }>
@@ -89,7 +103,7 @@ function App() {
             <Route path="/saved-movies" element={
               <>
                 <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <SavedMovies onSearchForm={handleSearchRequest} cards={savedCards} onCardSaved={handleCardSaved}/>
+                <SavedMovies onSearchForm={handleSavedMoviesSearch} cards={savedMovies} onCardSaved={handleMovieSaving}/>
                 <Footer/>
               </>
             }>
