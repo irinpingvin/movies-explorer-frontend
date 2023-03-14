@@ -1,0 +1,48 @@
+.auth-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-links__link {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1.6;
+  text-decoration: none;
+  color: #000000;
+  margin: 0;
+}
+
+.auth-links__link:hover {
+  opacity: 0.8;
+}
+
+.auth-links__link_type_signup {
+  margin-right: 14px;
+}
+
+.auth-links__link_type_signin {
+  background-color: #2BE080;
+  width: 54px;
+  height: 26px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .auth-links__link {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .auth-links__link_type_signup {
+    margin-right: 30px;
+  }
+
+  .auth-links__link_type_signin {
+    width: 76px;
+    height: 32px;
+  }
+}

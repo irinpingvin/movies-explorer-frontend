@@ -1,0 +1,47 @@
+.content-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-links__movies {
+  display: none;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #000000;
+  margin: 0 16px 0 0;
+  text-decoration: none;
+}
+
+.content-links__movies:hover {
+  opacity: 0.6;
+}
+
+.content-links__saved-movies {
+  display: none;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #000000;
+  margin: 0;
+  text-decoration: none;
+}
+
+.content-links__saved-movies:hover {
+  opacity: 0.6;
+}
+
+.content-links_type_active {
+  font-weight: 500;
+}
+
+@media screen and (min-width: 1280px) {
+  .content-links__movies {
+    display: block;
+  }
+
+  .content-links__saved-movies {
+    display: block;
+  }
+}

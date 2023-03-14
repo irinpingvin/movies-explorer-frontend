@@ -1,0 +1,133 @@
+.search {
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+.search__form {
+  margin: 80px 0 43px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search__form-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #F9F9F9;
+  border-radius: 9px;
+  width: 300px;
+  height: 72px;
+  margin: 0 0 45px;
+}
+
+.search__form-icon {
+  display: none;
+}
+
+.search__input {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #A0A0A0;
+  border: none;
+  outline: none;
+  background: #F9F9F9;
+  width: 122px;
+  padding: 0;
+  margin: 0 46px 0 19px;
+}
+
+.search__input:focus {
+  border-bottom: 1px solid rgba(52, 86, 243, 1);
+}
+
+.search__button {
+  background: url(../../images/search__button.svg) no-repeat;
+  background-size: 34px 34px;
+  width: 34px;
+  height: 34px;
+  margin: 0 19px 0 0;
+  border: none;
+  padding: 0;
+}
+
+.search__button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.search__border {
+  border-bottom: 1px solid rgba(232, 232, 232, 1);
+  height: 1px;
+  width: 100%;
+  margin: 0 0 10px;
+}
+
+.search__vertical-border {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .search {
+    max-width: 708px;
+  }
+
+  .search__form {
+    margin-bottom: 109px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .search__form-content {
+    margin: 0;
+    width: 520px;
+    justify-content: flex-start;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .search__form-icon {
+    display: block;
+    width: 34px;
+    height: 34px;
+    margin: 0 10px 0 19px;
+  }
+
+  .search__input {
+    margin-left: 0;
+    width: 340px;
+    font-size: 18px;
+    line-height: 1.1;
+  }
+
+  .search__vertical-border {
+    display: block;
+    border-right: 1px solid rgba(203, 203, 203, 1);
+    height: 40px;
+    margin: 0 19px 0 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .search {
+    max-width: 1140px;
+  }
+
+  .search__form {
+    margin-top: 70px;
+    margin-bottom: 69px;
+  }
+
+  .search__form-content {
+    width: 943px;
+  }
+
+  .search__input {
+    width: 740px;
+  }
+
+  .search__button {
+    margin-right: 30px;
+  }
+}

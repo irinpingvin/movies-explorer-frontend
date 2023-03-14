@@ -1,0 +1,19 @@
+.profile-link {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.15;
+  color: #000000;
+  text-decoration: none;
+  margin: 0;
+  background-color: #F9F9F9;
+  border-radius: 20px;
+  width: 100px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-link:hover {
+  opacity: 0.8;
+}

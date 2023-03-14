@@ -1,0 +1,67 @@
+.submit__form-button {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  background: #3456F3;
+  border-radius: 3px;
+  background-size: 260px 45px;
+  width: 260px;
+  height: 45px;
+  border: none;
+  margin: 0 0 14px;
+  padding: 0;
+}
+
+.submit__form-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.submit__form-button_type_profile {
+  font-weight: 400;
+  color: #000000;
+  background: #FFFFFF;
+  height: 15px;
+  margin-top: 377px;
+}
+
+.submit__form-button_type_register {
+  margin-top: 220px;
+}
+
+.submit__form-button_type_login {
+  margin-top: 310px;
+}
+
+@media screen and (min-width: 768px) {
+  .submit__form-button {
+    font-size: 14px;
+    line-height: 1.2;
+    background-size: 396px 45px;
+    width: 396px;
+  }
+
+  .submit__form-button_type_register {
+    margin-top: 132px;
+  }
+
+  .submit__form-button_type_login {
+    margin-top: 222px;
+  }
+
+  .submit__form-button_type_profile {
+    margin-top: 210px;
+    width: 410px;
+    font-size: 13px;
+    line-height: 1.2;  }
+}
+
+@media screen and (min-width: 1280px) {
+  .submit__form-button_type_profile {
+    margin-top: 222px;
+  }
+}

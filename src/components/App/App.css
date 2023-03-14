@@ -1,0 +1,14 @@
+.app {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  background-color: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app__container {
+  margin: 0 auto;
+  min-width: 320px;
+  max-width: 1280px;
+  min-height: 100vh;
+}
