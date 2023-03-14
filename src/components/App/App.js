@@ -10,8 +10,10 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import { moviesList, savedMoviesList } from "../../utils/constants";
+import { savedMoviesList } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/currentUser/CurrentUserContext";
+import {moviesApi} from "../../utils/MoviesApi";
+import {moviesFilter} from "../../utils/MoviesFilter";
 
 function App() {
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = React.useState(false);
@@ -24,14 +26,13 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
-    setCards(moviesList);
     setSavedCards(savedMoviesList);
     setCurrentUser({
       name: "Irina",
       email: "test@mail.ru"
     });
     setLoggedIn(true);
-  }, []);
+  }, [cards]);
 
   function handleMenuClick() {
     setIsNavigationPopupOpen(true);
@@ -42,6 +43,11 @@ function App() {
   }
 
   function handleSearchRequest(searchRequest) {
+    moviesApi.getMovies()
+      .then(movies => {
+        setCards(moviesFilter.getFilteredMovies(movies, searchRequest, true));
+      })
+      .catch(error => console.log(error));
   }
 
   function handleCardSaved(card) {
