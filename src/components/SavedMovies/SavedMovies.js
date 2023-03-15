@@ -5,7 +5,7 @@ function SavedMovies(props) {
   return (
     <main className="saved-movies">
       <SearchForm onSearchForm={props.onSearchForm}/>
-      <MoviesCardList cards={props.cards} onCardSaved={props.onCardSaved} isSavedMode={true}/>
+      <MoviesCardList movies={props.movies} onMovieSave={props.onMovieSave} isSavedMode={true}/>
     </main>
   );
 }

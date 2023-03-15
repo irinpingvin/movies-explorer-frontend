@@ -1,14 +1,21 @@
 import React from "react";
 
 function MoviesCard({ card, savedCards, onCardSave, isSavedMode }) {
-  const isCardSaved = savedCards.some(element => element.movieId === card.id);
   let cardSaveButtonClassName;
   const movieDuration = getMovieDurationInHours();
+  let cardImageUrl;
+  let thumbnail;
+
 
   if (isSavedMode) {
     cardSaveButtonClassName = 'movie__button movie__button_added';
+    cardImageUrl = card.image;
+    thumbnail = card.thumbnail;
   } else {
+    const isCardSaved = savedCards.some(element => element.movieId === card.id);
     cardSaveButtonClassName = `movie__button ${isCardSaved ? 'movie__button_saved' : 'movie__button_unsaved'}`;
+    cardImageUrl = `https://api.nomoreparties.co${card.image.url}`;
+    thumbnail = `https://api.nomoreparties.co${card.image.formats.thumbnail.url}`;
   }
 
   function handleSave() {
@@ -19,10 +26,10 @@ function MoviesCard({ card, savedCards, onCardSave, isSavedMode }) {
       duration: card.duration,
       year: card.year,
       description: card.description,
-      image: card.image.url,
+      image: cardImageUrl,
       trailerLink: card.trailerLink,
       nameEN: card.nameEN,
-      thumbnail: card.image.formats.thumbnail.url,
+      thumbnail: thumbnail,
       movieId: card.id,
     });
   }
@@ -51,7 +58,7 @@ function MoviesCard({ card, savedCards, onCardSave, isSavedMode }) {
     <li className="movie">
       <h2 className="movie__name">{card.nameRU}</h2>
       <p className="movie__duration">{movieDuration}</p>
-      <div className="movie__pic" style={{backgroundImage: `url(https://api.nomoreparties.co/${card.image.url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}></div>
+      <div className="movie__pic" style={{backgroundImage: `url(${cardImageUrl})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}></div>
       <button className={cardSaveButtonClassName} type="button" onClick={handleSave}></button>
     </li>
   );

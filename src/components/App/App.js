@@ -10,7 +10,6 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import { savedMoviesList } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/currentUser/CurrentUserContext";
 import {moviesApi} from "../../utils/MoviesApi";
 import {mainApi} from "../../utils/MainApi";
@@ -28,13 +27,12 @@ function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    setSavedMovies(savedMoviesList);
     setCurrentUser({
       name: "Irina",
       email: "test@mail.ru"
     });
     setLoggedIn(true);
-  }, [movies]);
+  }, [movies, savedMovies]);
 
   function handleMenuClick() {
     setIsNavigationPopupOpen(true);
@@ -62,7 +60,7 @@ function App() {
     if (!isMovieSaved) {
       mainApi.saveMovie(movieInfo)
         .then(movie => {
-          setSavedMovies(savedMovies.add(movie));
+          setSavedMovies(savedMovies => [...savedMovies, movie]);
         })
         .catch(error => console.log(error));
     }
@@ -116,7 +114,7 @@ function App() {
             <Route path="/saved-movies" element={
               <>
                 <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <SavedMovies onSearchForm={handleSavedMoviesSearch} cards={savedMovies} onCardSaved={handleMovieSaving}/>
+                <SavedMovies onSearchForm={handleSavedMoviesSearch} movies={savedMovies} onMovieSave={handleMovieSaving}/>
                 <Footer/>
               </>
             }>
