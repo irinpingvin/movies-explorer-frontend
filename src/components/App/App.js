@@ -27,12 +27,16 @@ function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    setCurrentUser({
-      name: "Irina",
-      email: "test@mail.ru"
-    });
-    setLoggedIn(true);
-  }, [movies, savedMovies]);
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      mainApi.validateToken()
+        .then(user => {
+          setLoggedIn(true);
+          setCurrentUser(user);
+        })
+        .catch(error => console.log(error));
+    }
+  }, [loggedIn]);
 
   function handleMenuClick() {
     setIsNavigationPopupOpen(true);
@@ -70,9 +74,20 @@ function App() {
   }
 
   function handleSignout() {
+    mainApi.signOut()
+      .then(() => {
+        localStorage.removeItem('jwt');
+        setLoggedIn(false);
+      })
   }
 
   function handleRegister(userData) {
+    if (!userData.password || !userData.email || !userData.name)
+      return;
+
+    mainApi.signUp(userData)
+      .then(() => navigate('/signin'))
+      .catch(error => console.log(error));
   }
 
   function handleLogin(userData) {
@@ -84,7 +99,7 @@ function App() {
         if (res.token) {
           localStorage.setItem('jwt', res.token);
           setLoggedIn(true);
-          navigate('/');
+          navigate('/movies');
         }
       })
       .catch(error => console.log(error));

@@ -23,7 +23,30 @@ class MainApi {
       method: 'POST',
       headers: this.#headers,
       credentials: 'include',
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
+    }));
+  }
+
+  signUp(userData) {
+    return this.#handleServerResponse(fetch(`${this.#baseurl}/signup`, {
+      method: 'POST',
+      headers: this.#headers,
+      body: JSON.stringify(userData),
+    }));
+  }
+
+  signOut() {
+    return this.#handleServerResponse(fetch(`${this.#baseurl}/signout`, {
+      method: 'POST',
+      headers: this.#headers,
+      credentials: 'include',
+    }));
+  }
+
+  validateToken() {
+    return this.#handleServerResponse(fetch(`${this.#baseurl}/users/me`, {
+      headers: this.#headers,
+      credentials: 'include',
     }));
   }
 
@@ -32,7 +55,7 @@ class MainApi {
       method: 'POST',
       headers: this.#headers,
       credentials: 'include',
-      body: JSON.stringify(movieInfo)
+      body: JSON.stringify(movieInfo),
     }));
   };
 }
