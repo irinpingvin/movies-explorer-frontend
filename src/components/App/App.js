@@ -71,6 +71,11 @@ function App() {
   }
 
   function handleChangeUserInfo(userInfo) {
+    mainApi.updateUserInfo(userInfo)
+      .then(user => {
+        setCurrentUser(user);
+      })
+      .catch(error => console.log(error));
   }
 
   function handleSignout() {
@@ -79,6 +84,7 @@ function App() {
         localStorage.removeItem('jwt');
         setLoggedIn(false);
       })
+      .catch(error => console.log(error));
   }
 
   function handleRegister(userData) {

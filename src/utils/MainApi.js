@@ -50,6 +50,15 @@ class MainApi {
     }));
   }
 
+  updateUserInfo(userInfo) {
+    return this.#handleServerResponse(fetch(`${this.#baseurl}/users/me`, {
+      method: 'PATCH',
+      headers: this.#headers,
+      credentials: 'include',
+      body: JSON.stringify(userInfo),
+    }));
+  }
+
   saveMovie(movieInfo) {
     return this.#handleServerResponse(fetch(`${this.#baseurl}/movies`, {
       method: 'POST',

@@ -32,7 +32,7 @@ function Profile(props) {
 
   return (
     <main className="profile">
-      <h2 className="profile__title">Привет, {name}!</h2>
+      <h2 className="profile__title">Привет, {userInfo.name}!</h2>
       <SubmitForm buttonText="Редактировать" onSubmitForm={handleSubmit}>
         <div className="profile__input-area">
           <p className="profile__input-title">Имя</p>
