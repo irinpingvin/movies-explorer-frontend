@@ -61,7 +61,7 @@ function MoviesCard({ card, savedCards, onCardSave, isSavedMode }) {
     <li className="movie">
       <h2 className="movie__name">{card.nameRU}</h2>
       <p className="movie__duration">{movieDuration}</p>
-      <div className="movie__pic" style={{backgroundImage: `url(${cardImageUrl})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}></div>
+      <a className="movie__pic" style={{backgroundImage: `url(${cardImageUrl})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}} href={card.trailerLink} target="_blank" rel="noreferrer"></a>
       <button className={cardSaveButtonClassName} type="button" onClick={handleSave}></button>
     </li>
   );
