@@ -59,6 +59,13 @@ class MainApi {
     }));
   }
 
+  getMovies() {
+    return this.#handleServerResponse(fetch(`${this.#baseurl}/movies`, {
+      headers: this.#headers,
+      credentials: 'include',
+    }));
+  }
+
   saveMovie(movieInfo) {
     return this.#handleServerResponse(fetch(`${this.#baseurl}/movies`, {
       method: 'POST',
@@ -67,6 +74,14 @@ class MainApi {
       body: JSON.stringify(movieInfo),
     }));
   };
+
+  deleteMovie(id) {
+    return this.#handleServerResponse(fetch(`${this.#baseurl}/movies/${id}`, {
+      method: 'DELETE',
+      headers: this.#headers,
+      credentials: 'include',
+    }));
+  }
 }
 
 export const mainApi = new MainApi(MAIN_API_URL, HEADERS);

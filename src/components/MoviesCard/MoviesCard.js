@@ -6,7 +6,6 @@ function MoviesCard({ card, savedCards, onCardSave, isSavedMode }) {
   let cardImageUrl;
   let thumbnail;
 
-
   if (isSavedMode) {
     cardSaveButtonClassName = 'movie__button movie__button_added';
     cardImageUrl = card.image;
@@ -19,19 +18,23 @@ function MoviesCard({ card, savedCards, onCardSave, isSavedMode }) {
   }
 
   function handleSave() {
-    onCardSave({
-      nameRU: card.nameRU,
-      country: card.country,
-      director: card.director,
-      duration: card.duration,
-      year: card.year,
-      description: card.description,
-      image: cardImageUrl,
-      trailerLink: card.trailerLink,
-      nameEN: card.nameEN,
-      thumbnail: thumbnail,
-      movieId: card.id,
-    });
+    if (isSavedMode) {
+      onCardSave(card);
+    } else {
+      onCardSave({
+        nameRU: card.nameRU,
+        country: card.country,
+        director: card.director,
+        duration: card.duration,
+        year: card.year,
+        description: card.description,
+        image: cardImageUrl,
+        trailerLink: card.trailerLink,
+        nameEN: card.nameEN,
+        thumbnail: thumbnail,
+        movieId: card.id,
+      });
+    }
   }
 
   function getMovieDurationInHours() {
