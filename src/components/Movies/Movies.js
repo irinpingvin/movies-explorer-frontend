@@ -5,10 +5,12 @@ import React from "react";
 import {moviesApi} from "../../utils/MoviesApi";
 import {moviesFilter} from "../../utils/MoviesFilter";
 import {mainApi} from "../../utils/MainApi";
+import Preloader from "../Preloader/Preloader";
 
 function Movies() {
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [isPreloaderNeeded, setIsPreloaderNeeded] = React.useState(false);
 
   React.useEffect(() => {
     mainApi.getMovies()
@@ -17,9 +19,11 @@ function Movies() {
   }, []);
 
   function handleMoviesSearch(searchRequest) {
+    setIsPreloaderNeeded(true);
     moviesApi.getMovies()
       .then(moviesList => setMovies(moviesFilter.getFilteredMovies(moviesList, searchRequest, true)))
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => setIsPreloaderNeeded(false));
   }
 
   function handleMovieSaving(movieInfo) {
@@ -42,7 +46,11 @@ function Movies() {
   return (
     <main className="page-movies">
       <SearchForm onSearchForm={handleMoviesSearch}/>
-      <MoviesCardList movies={movies} savedMovies={savedMovies} onMovieSave={handleMovieSaving} isSavedMode={false}/>
+      {isPreloaderNeeded ?
+        <Preloader/>
+        :
+        <MoviesCardList movies={movies} savedMovies={savedMovies} onMovieSave={handleMovieSaving} isSavedMode={false}/>
+      }
       <More cards={movies}/>
     </main>
   );
