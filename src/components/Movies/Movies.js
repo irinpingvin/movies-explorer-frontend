@@ -11,6 +11,8 @@ function Movies() {
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isPreloaderNeeded, setIsPreloaderNeeded] = React.useState(false);
+  const [isNotificationNeeded, setIsNotificationNeeded] = React.useState(false);
+  const [notificationText, setNotificationText] = React.useState('');
 
   React.useEffect(() => {
     mainApi.getMovies()
@@ -20,10 +22,24 @@ function Movies() {
 
   function handleMoviesSearch(searchRequest) {
     setIsPreloaderNeeded(true);
+    setIsNotificationNeeded(false);
+
     moviesApi.getMovies()
-      .then(moviesList => setMovies(moviesFilter.getFilteredMovies(moviesList, searchRequest, true)))
-      .catch(error => console.log(error))
-      .finally(() => setIsPreloaderNeeded(false));
+      .then(moviesList => {
+        const filteredMovies = moviesFilter.getFilteredMovies(moviesList, searchRequest, true);
+        setMovies(filteredMovies);
+        if (filteredMovies.length === 0) {
+          setIsNotificationNeeded(true);
+          setNotificationText('Ничего не найдено');
+        }
+        setIsPreloaderNeeded(false);
+      })
+      .catch(() => {
+        setIsPreloaderNeeded(false);
+        setIsNotificationNeeded(true);
+        setNotificationText("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз");
+        setMovies([]);
+      });
   }
 
   function handleMovieSaving(movieInfo) {
@@ -52,6 +68,7 @@ function Movies() {
         <MoviesCardList movies={movies} savedMovies={savedMovies} onMovieSave={handleMovieSaving} isSavedMode={false}/>
       }
       <More cards={movies}/>
+      <p className={`movie__error-message ${isNotificationNeeded ? 'movie__error-message_active' : ''}`}>{notificationText}</p>
     </main>
   );
 }
