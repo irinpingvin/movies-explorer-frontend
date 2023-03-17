@@ -10,6 +10,10 @@
   line-height: 1.2;
   color: #000000;
   margin: 14px 14px 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 210px;
 }
 
 .movie__duration {
@@ -60,11 +64,19 @@
     width: 339px;
     height: 190px;
   }
+
+  .movie__name {
+    max-width: 250px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
   .movie__pic {
     width: 364px;
     height: 203px;
+  }
+
+  .movie__name {
+    max-width: 280px;
   }
 }
