@@ -64,15 +64,18 @@ function App() {
       return;
 
     mainApi.signUp(userData)
-      .then(() => navigate('/signin'))
+      .then(() => {
+        handleLogin(userData);
+      })
       .catch(error => console.log(error));
   }
 
   function handleLogin(userData) {
-    if (!userData.password || !userData.email)
+    const {password, email} = userData;
+    if (!password || !email)
       return;
 
-    mainApi.signIn(userData)
+    mainApi.signIn({password, email})
       .then(res => {
         if (res.token) {
           localStorage.setItem('jwt', res.token);
