@@ -7,6 +7,10 @@ class MoviesFilter {
         return movie.nameRU.toLowerCase().includes(searchRequest.toLowerCase()) && movie.duration > 40;
     });
   }
+
+  getPartMoviesList(movies, startPos, amount) {
+    return movies.slice(startPos, startPos + amount);
+  }
 }
 
 export const moviesFilter = new MoviesFilter();

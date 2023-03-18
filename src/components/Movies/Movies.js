@@ -9,6 +9,8 @@ import Preloader from "../Preloader/Preloader";
 
 function Movies() {
   const [movies, setMovies] = React.useState([]);
+  const [shownMovies, setShownMovies] = React.useState([]);
+  const [moviesToShow, setMoviesToShow] = React.useState(0);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isPreloaderNeeded, setIsPreloaderNeeded] = React.useState(false);
   const [isNotificationNeeded, setIsNotificationNeeded] = React.useState(false);
@@ -31,6 +33,10 @@ function Movies() {
         if (filteredMovies.length === 0) {
           setIsNotificationNeeded(true);
           setNotificationText('Ничего не найдено');
+        } else {
+          const moviesPortion = moviesFilter.getPartMoviesList(filteredMovies, 0, 12);
+          setShownMovies(moviesPortion);
+          setMoviesToShow(3);
         }
         setIsPreloaderNeeded(false);
       })
@@ -39,6 +45,7 @@ function Movies() {
         setIsNotificationNeeded(true);
         setNotificationText("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз");
         setMovies([]);
+        setShownMovies([]);
       });
   }
 
@@ -59,15 +66,20 @@ function Movies() {
     }
   }
 
+  function handleMoreMovies() {
+    const moviesPortion = moviesFilter.getPartMoviesList(movies, shownMovies.length, moviesToShow);
+    moviesPortion.forEach(item => setShownMovies(shownMovies => [...shownMovies, item]));
+  }
+
   return (
     <main className="page-movies">
       <SearchForm onSearchForm={handleMoviesSearch}/>
       {isPreloaderNeeded ?
         <Preloader/>
         :
-        <MoviesCardList movies={movies} savedMovies={savedMovies} onMovieSave={handleMovieSaving} isSavedMode={false}/>
+        <MoviesCardList movies={shownMovies} savedMovies={savedMovies} onMovieSave={handleMovieSaving} isSavedMode={false}/>
       }
-      <More cards={movies}/>
+      <More moviesLeft={movies.length - shownMovies.length} moviesToShow={moviesToShow} onMoreClick={handleMoreMovies}/>
       <p className={`movie__error-message ${isNotificationNeeded ? 'movie__error-message_active' : ''}`}>{notificationText}</p>
     </main>
   );
