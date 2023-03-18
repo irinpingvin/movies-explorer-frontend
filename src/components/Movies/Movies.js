@@ -10,16 +10,37 @@ import Preloader from "../Preloader/Preloader";
 function Movies() {
   const [movies, setMovies] = React.useState([]);
   const [shownMovies, setShownMovies] = React.useState([]);
-  const [moviesToShow, setMoviesToShow] = React.useState(0);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isPreloaderNeeded, setIsPreloaderNeeded] = React.useState(false);
   const [isNotificationNeeded, setIsNotificationNeeded] = React.useState(false);
   const [notificationText, setNotificationText] = React.useState('');
+  const [windowInnerWidth, setWindowInnerWidth] = React.useState(window.innerWidth);
+  const firstMoviesAmount = windowInnerWidth >= 1280 ? 12 : windowInnerWidth >= 768 ? 8 : 5;
+  const additionalMoviesAmount = windowInnerWidth >= 1280 ? 3 : 2;
 
   React.useEffect(() => {
     mainApi.getMovies()
       .then(moviesList => setSavedMovies(moviesList))
       .catch(error => console.log(error));
+  }, []);
+
+  React.useEffect(() => {
+    let resizeTimeout;
+
+    window.addEventListener("resize", handleWindowChange);
+
+    function handleWindowChange() {
+      if (!resizeTimeout) {
+        resizeTimeout = setTimeout(function() {
+          resizeTimeout = null;
+          setWindowInnerWidth(window.innerWidth);
+        }, 66);
+      }
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleWindowChange);
+    };
   }, []);
 
   function handleMoviesSearch(searchRequest) {
@@ -34,9 +55,7 @@ function Movies() {
           setIsNotificationNeeded(true);
           setNotificationText('Ничего не найдено');
         } else {
-          const moviesPortion = moviesFilter.getPartMoviesList(filteredMovies, 0, 12);
-          setShownMovies(moviesPortion);
-          setMoviesToShow(3);
+          setShownMovies(moviesFilter.getPartMoviesList(filteredMovies, 0, firstMoviesAmount));
         }
         setIsPreloaderNeeded(false);
       })
@@ -67,7 +86,7 @@ function Movies() {
   }
 
   function handleMoreMovies() {
-    const moviesPortion = moviesFilter.getPartMoviesList(movies, shownMovies.length, moviesToShow);
+    const moviesPortion = moviesFilter.getPartMoviesList(movies, shownMovies.length, additionalMoviesAmount);
     moviesPortion.forEach(item => setShownMovies(shownMovies => [...shownMovies, item]));
   }
 
@@ -79,7 +98,7 @@ function Movies() {
         :
         <MoviesCardList movies={shownMovies} savedMovies={savedMovies} onMovieSave={handleMovieSaving} isSavedMode={false}/>
       }
-      <More moviesLeft={movies.length - shownMovies.length} moviesToShow={moviesToShow} onMoreClick={handleMoreMovies}/>
+      <More moviesLeft={movies.length - shownMovies.length} onMoreClick={handleMoreMovies}/>
       <p className={`movie__error-message ${isNotificationNeeded ? 'movie__error-message_active' : ''}`}>{notificationText}</p>
     </main>
   );

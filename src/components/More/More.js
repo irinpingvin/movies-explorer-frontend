@@ -5,7 +5,7 @@ function More(props) {
 
   return (
     <section className="more">
-      {props.moviesLeft > 0 && props.moviesLeft >= props.moviesToShow ? (
+      {props.moviesLeft > 0 ? (
         <button className="more-button" onClick={handleMoreMovies}>Ещё</button>
         ) : null}
     </section>
