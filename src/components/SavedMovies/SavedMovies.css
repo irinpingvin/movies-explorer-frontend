@@ -1,3 +1,17 @@
 .saved-movies {
   margin-bottom: 140px;
 }
+
+.saved-movies__error-message {
+  display: none;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.2;
+  color: #000000;
+  margin: 0;
+  text-align: center;
+}
+
+.saved-movies__error-message_active {
+  display: block;
+}

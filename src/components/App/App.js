@@ -42,10 +42,6 @@ function App() {
     setIsNavigationPopupOpen(false);
   }
 
-  function handleSavedMoviesSearch(searchRequest) {
-
-  }
-
   function handleChangeUserInfo(userInfo) {
     mainApi.updateUserInfo(userInfo)
       .then(user => {
@@ -111,7 +107,7 @@ function App() {
             <Route path="/saved-movies" element={
               <>
                 <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <SavedMovies onSearchForm={handleSavedMoviesSearch} />
+                <SavedMovies />
                 <Footer/>
               </>
             }>
