@@ -28,8 +28,8 @@ function SavedMovies() {
       .catch(error => console.log(error));
   }
 
-  function handleMoviesSearch(searchRequest) {
-    const filteredMovies = moviesFilter.getFilteredMovies(savedMovies, searchRequest, true);
+  function handleMoviesSearch(searchRequest, isShortMoviesNeeded) {
+    const filteredMovies = moviesFilter.getFilteredMovies(savedMovies, searchRequest, isShortMoviesNeeded);
 
     setIsNotificationNeeded(false);
     setShownMovies(filteredMovies);

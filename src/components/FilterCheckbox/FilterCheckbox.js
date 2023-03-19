@@ -1,8 +1,8 @@
-function FilterCheckbox() {
+function FilterCheckbox(props) {
   return (
     <div className="filter">
       <label className="filter__label">
-        <input type="checkbox" name="filter-checkbox" className="filter__invisible-checkbox"/>
+        <input type="checkbox" name="filter-checkbox" className="filter__invisible-checkbox" checked={props.isShortMoviesNeeded} onClick={props.onCheckboxClick}/>
         <span className="filter__visible-checkbox"></span>
       </label>
       <p className="filter__title">Короткометражки</p>

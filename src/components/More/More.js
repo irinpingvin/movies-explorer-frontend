@@ -1,12 +1,8 @@
 function More(props) {
-  function handleMoreMovies() {
-    props.onMoreClick();
-  }
-
   return (
     <section className="more">
       {props.moviesLeft > 0 ? (
-        <button className="more-button" onClick={handleMoreMovies}>Ещё</button>
+        <button className="more-button" onClick={props.onMoreClick}>Ещё</button>
         ) : null}
     </section>
   );

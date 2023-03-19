@@ -43,13 +43,13 @@ function Movies() {
     };
   }, []);
 
-  function handleMoviesSearch(searchRequest) {
+  function handleMoviesSearch(searchRequest, isShortMoviesNeeded) {
     setIsPreloaderNeeded(true);
     setIsNotificationNeeded(false);
 
     moviesApi.getMovies()
       .then(moviesList => {
-        const filteredMovies = moviesFilter.getFilteredMovies(moviesList, searchRequest, true);
+        const filteredMovies = moviesFilter.getFilteredMovies(moviesList, searchRequest, isShortMoviesNeeded);
         setMovies(filteredMovies);
         if (filteredMovies.length === 0) {
           setIsNotificationNeeded(true);

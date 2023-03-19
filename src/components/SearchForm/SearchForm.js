@@ -4,6 +4,7 @@ import searchFormIcon from "../../images/search-from__icon.svg"
 
 function SearchForm(props) {
   const [searchRequest, setSearchRequest] = React.useState('');
+  const [isShortMoviesNeeded, setIsShortMoviesNeeded] = React.useState(true);
 
   React.useEffect(() => {
     setSearchRequest('')
@@ -11,11 +12,15 @@ function SearchForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSearchForm(searchRequest);
+    props.onSearchForm(searchRequest, isShortMoviesNeeded);
   }
 
   function handleSearchRequest(e) {
     setSearchRequest(e.target.value);
+  }
+
+  function handleCheckboxClick() {
+    setIsShortMoviesNeeded(!isShortMoviesNeeded);
   }
 
   return (
@@ -27,7 +32,7 @@ function SearchForm(props) {
           <button type="submit" className="search__button"></button>
           <div className="search__vertical-border"></div>
         </div>
-        <FilterCheckbox/>
+        <FilterCheckbox isShortMoviesNeeded={props.isShortMoviesNeeded} onCheckboxClick={handleCheckboxClick}/>
       </form>
       <div className="search__border"></div>
     </section>
