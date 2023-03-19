@@ -20,6 +20,7 @@ function App() {
     email: ''
   });
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [submitErrorText, setSubmitErrorText] = React.useState('');
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -43,11 +44,16 @@ function App() {
   }
 
   function handleChangeUserInfo(userInfo) {
+    setSubmitErrorText('');
     mainApi.updateUserInfo(userInfo)
       .then(user => {
         setCurrentUser(user);
+        setSubmitErrorText('Данные успешно обновлены!');
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        setSubmitErrorText(error);
+      });
   }
 
   function handleSignout() {
@@ -118,21 +124,21 @@ function App() {
             <Route path="/profile" element={
               <>
                 <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout}/>
+                <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout} errorText={submitErrorText}/>
               </>
             }>
             </Route>
             <Route path="/signup" element={
               <>
                 <Header isNavigationNeeded={false} loggedIn={loggedIn}/>
-                <Register onRegister={handleRegister}/>
+                <Register onRegister={handleRegister} errorText={submitErrorText}/>
               </>
             }>
             </Route>
             <Route path="/signin" element={
               <>
                 <Header isNavigationNeeded={false} loggedIn={loggedIn}/>
-                <Login onLogin={handleLogin}/>
+                <Login onLogin={handleLogin} errorText={submitErrorText}/>
               </>
             }>
             </Route>

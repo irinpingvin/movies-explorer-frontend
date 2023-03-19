@@ -31,7 +31,7 @@ function Login(props) {
   return (
     <main className="login">
       <h2 className="login__title">Рады видеть!</h2>
-      <SubmitForm buttonText="Войти" onSubmitForm={handleSubmit}>
+      <SubmitForm buttonText="Войти" onSubmitForm={handleSubmit} errorText={props.errorText}>
         <div className="login__input-area">
           <p className="login__input-title">E-mail</p>
           <input type="text" name="login-name" required className="login__input-value"

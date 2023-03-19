@@ -2,20 +2,21 @@ import {useLocation} from "react-router-dom";
 
 function SubmitForm(props) {
   const location = useLocation();
-  let submitButtonClass = 'submit__form-button';
+  let submitButtonClass = 'submit-form__button';
 
   if (location.pathname === '/profile') {
-    submitButtonClass = 'submit__form-button submit__form-button_type_profile';
-  } else if (location.pathname === '/signup') {
-    submitButtonClass = 'submit__form-button submit__form-button_type_register';
-  } else if (location.pathname === '/signin') {
-    submitButtonClass = 'submit__form-button submit__form-button_type_login'
+    submitButtonClass = 'submit-form__button submit-form__button_type_profile';
   }
 
   return (
-    <form className="submit__form" name="submit-form" onSubmit={props.onSubmitForm}>
-      {props.children}
-      <button type="submit" className={submitButtonClass}>{props.buttonText}</button>
+    <form className="submit-form" name="submit-form" onSubmit={props.onSubmitForm}>
+      <div className="submit-form__field-area">
+        {props.children}
+      </div>
+      <div className="submit-form__result-area">
+        <p className={`${props.errorText ? 'submit-form__error submit-form__error_active' : 'submit-form__error'}`}>{props.errorText}</p>
+        <button type="submit" className={submitButtonClass}>{props.buttonText}</button>
+      </div>
     </form>
   );
 }

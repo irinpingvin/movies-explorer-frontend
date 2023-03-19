@@ -52,7 +52,7 @@
   line-height: 1.25;
   text-align: center;
   color: #A0A0A0;
-  margin: 14px 0 30px;
+  margin: 0;
 }
 
 .login__auth-link {
@@ -80,7 +80,6 @@
   .login__auth-caption {
     font-size: 14px;
     line-height: 1.2;
-    margin-top: 16px;
   }
 
   .login__auth-link {
