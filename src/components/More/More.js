@@ -1,4 +1,5 @@
 function More(props) {
+  console.log(props.moviesLeft);
   return (
     <section className="more">
       {props.moviesLeft > 0 ? (

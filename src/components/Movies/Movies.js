@@ -19,6 +19,19 @@ function Movies() {
   const additionalMoviesAmount = windowInnerWidth >= 1280 ? 3 : 2;
 
   React.useEffect(() => {
+    const movies = localStorage.getItem('movies');
+    const shownMovies = localStorage.getItem('shownMovies');
+
+    if (movies) {
+     setMovies(JSON.parse(movies));
+    }
+
+    if (shownMovies) {
+      setShownMovies(JSON.parse(shownMovies));
+    }
+  }, []);
+
+  React.useEffect(() => {
     mainApi.getMovies()
       .then(moviesList => setSavedMovies(moviesList))
       .catch(error => console.log(error));
@@ -55,7 +68,10 @@ function Movies() {
           setIsNotificationNeeded(true);
           setNotificationText('Ничего не найдено');
         } else {
-          setShownMovies(moviesFilter.getPartMoviesList(filteredMovies, 0, firstMoviesAmount));
+          const partMoviesList = moviesFilter.getPartMoviesList(filteredMovies, 0, firstMoviesAmount);
+          setShownMovies(partMoviesList);
+          localStorage.setItem('movies', JSON.stringify(filteredMovies));
+          localStorage.setItem('shownMovies', JSON.stringify(partMoviesList));
         }
         setIsPreloaderNeeded(false);
       })
@@ -87,7 +103,12 @@ function Movies() {
 
   function handleMoreMovies() {
     const moviesPortion = moviesFilter.getPartMoviesList(movies, shownMovies.length, additionalMoviesAmount);
-    moviesPortion.forEach(item => setShownMovies(shownMovies => [...shownMovies, item]));
+    const localShownMovies = JSON.parse(localStorage.getItem('shownMovies'));
+    moviesPortion.forEach(item => {
+      setShownMovies(shownMovies => [...shownMovies, item]);
+      localShownMovies.push(item);
+    });
+    localStorage.setItem('shownMovies', JSON.stringify(localShownMovies));
   }
 
   return (
