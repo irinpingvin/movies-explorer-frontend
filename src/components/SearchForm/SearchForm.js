@@ -1,14 +1,25 @@
 import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import searchFormIcon from "../../images/search-from__icon.svg"
+import {useLocation} from "react-router-dom";
 
 function SearchForm(props) {
   const [searchRequest, setSearchRequest] = React.useState('');
   const [isShortMoviesNeeded, setIsShortMoviesNeeded] = React.useState(true);
+  const location = useLocation();
 
   React.useEffect(() => {
-    setSearchRequest('')
-  }, []);
+    if (location.pathname === '/movies') {
+      const request = JSON.parse(localStorage.getItem('searchRequest'));
+      if (request) {
+        setSearchRequest(request.request);
+        setIsShortMoviesNeeded(request.shortMovies);
+      }
+    } else {
+      setSearchRequest('');
+      setIsShortMoviesNeeded(true);
+    }
+  }, [location.pathname]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,8 +30,8 @@ function SearchForm(props) {
     setSearchRequest(e.target.value);
   }
 
-  function handleCheckboxClick() {
-    setIsShortMoviesNeeded(!isShortMoviesNeeded);
+  function handleCheckboxClick(e) {
+    setIsShortMoviesNeeded(e.target.checked);
   }
 
   return (
@@ -32,7 +43,7 @@ function SearchForm(props) {
           <button type="submit" className="search__button"></button>
           <div className="search__vertical-border"></div>
         </div>
-        <FilterCheckbox isShortMoviesNeeded={props.isShortMoviesNeeded} onCheckboxClick={handleCheckboxClick}/>
+        <FilterCheckbox isShortMoviesNeeded={isShortMoviesNeeded} onCheckboxClick={handleCheckboxClick}/>
       </form>
       <div className="search__border"></div>
     </section>

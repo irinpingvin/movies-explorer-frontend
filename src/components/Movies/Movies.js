@@ -72,6 +72,10 @@ function Movies() {
           setShownMovies(partMoviesList);
           localStorage.setItem('movies', JSON.stringify(filteredMovies));
           localStorage.setItem('shownMovies', JSON.stringify(partMoviesList));
+          localStorage.setItem('searchRequest', JSON.stringify({
+            request: searchRequest,
+            shortMovies: isShortMoviesNeeded
+          }));
         }
         setIsPreloaderNeeded(false);
       })
