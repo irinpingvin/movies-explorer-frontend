@@ -67,16 +67,20 @@ function Movies() {
         if (filteredMovies.length === 0) {
           setIsNotificationNeeded(true);
           setNotificationText('Ничего не найдено');
+          setShownMovies([]);
+          localStorage.setItem('shownMovies', JSON.stringify([]));
         } else {
           const partMoviesList = moviesFilter.getPartMoviesList(filteredMovies, 0, firstMoviesAmount);
           setShownMovies(partMoviesList);
-          localStorage.setItem('movies', JSON.stringify(filteredMovies));
           localStorage.setItem('shownMovies', JSON.stringify(partMoviesList));
-          localStorage.setItem('searchRequest', JSON.stringify({
-            request: searchRequest,
-            shortMovies: isShortMoviesNeeded
-          }));
         }
+
+        localStorage.setItem('movies', JSON.stringify(filteredMovies));
+        localStorage.setItem('searchRequest', JSON.stringify({
+          request: searchRequest,
+          shortMovies: isShortMoviesNeeded
+        }));
+
         setIsPreloaderNeeded(false);
       })
       .catch(() => {

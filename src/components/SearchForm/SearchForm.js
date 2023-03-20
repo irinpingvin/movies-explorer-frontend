@@ -17,7 +17,7 @@ function SearchForm(props) {
       setValues({...values, search: request.request});
       setIsShortMoviesNeeded(request.shortMovies);
     }
-  }, [location.pathname, setValues, values]);
+  }, [location.pathname]);
 
   function handleSubmit(e) {
     e.preventDefault();
