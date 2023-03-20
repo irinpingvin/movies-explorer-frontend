@@ -67,7 +67,7 @@
 @media screen and (min-width: 768px) {
   .filter {
     background: #F9F9F9;
-    width: 197px;
+    width: 188px;
     height: 72px;
     border-top-right-radius: 9px;
     border-bottom-right-radius: 9px;
@@ -81,5 +81,11 @@
     font-size: 13px;
     line-height: 1.4;
     margin-right: 30px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .filter {
+    width: 197px;
   }
 }
