@@ -8,8 +8,12 @@ function SubmitForm(props) {
     submitButtonClass = 'submit-form__button submit-form__button_type_profile';
   }
 
+  if (!props.isValid) {
+    submitButtonClass += ' submit-form__button_inactive';
+  }
+
   return (
-    <form className="submit-form" name="submit-form" onSubmit={props.onSubmitForm}>
+    <form className="submit-form" name="submit-form" onSubmit={props.onSubmitForm} noValidate>
       <div className="submit-form__field-area">
         {props.children}
       </div>

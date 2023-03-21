@@ -23,3 +23,5 @@ export function useFormWithValidation(initialValues) {
 
   return { values, setValues, handleChange, errors, isValid, resetForm };
 }
+
+export const emailPattern = new RegExp(/\S+@(\w|\w-\w)+\.(ru|com)/);
