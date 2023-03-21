@@ -66,20 +66,22 @@ function App() {
   }
 
   function handleRegister(userData) {
-    if (!userData.password || !userData.email || !userData.name)
-      return;
+    setSubmitErrorText('');
 
     mainApi.signUp(userData)
       .then(() => {
         handleLogin(userData);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        setSubmitErrorText(error);
+      });
   }
 
   function handleLogin(userData) {
     const {password, email} = userData;
-    if (!password || !email)
-      return;
+
+    setSubmitErrorText('');
 
     mainApi.signIn({password, email})
       .then(res => {
@@ -89,7 +91,10 @@ function App() {
           navigate('/movies');
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        setSubmitErrorText(error);
+      });
   }
 
   return (
