@@ -10,6 +10,7 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/currentUser/CurrentUserContext";
 import {mainApi} from "../../utils/MainApi";
 
@@ -119,26 +120,35 @@ function App() {
             }>
             </Route>
             <Route path="/movies" element={
-              <>
-                <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <Movies />
-                <Footer/>
-              </>
+              <ProtectedRoute loggedIn={loggedIn} element={
+                <>
+                  <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                  <Movies />
+                  <Footer/>
+                </>
+              }>
+              </ProtectedRoute>
             }>
             </Route>
             <Route path="/saved-movies" element={
-              <>
-                <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <SavedMovies />
-                <Footer/>
-              </>
+              <ProtectedRoute loggedIn={loggedIn} element={
+                <>
+                  <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                  <SavedMovies />
+                  <Footer/>
+                </>
+              }>
+              </ProtectedRoute>
             }>
             </Route>
             <Route path="/profile" element={
-              <>
-                <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout} errorMessage={submitErrorMessage}/>
-              </>
+              <ProtectedRoute loggedIn={loggedIn} element={
+                <>
+                  <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                  <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout} errorMessage={submitErrorMessage}/>
+                </>
+              }>
+              </ProtectedRoute>
             }>
             </Route>
             <Route path="/signup" element={
