@@ -28,12 +28,7 @@
   cursor: default;
 }
 
-.submit-form__button_inactive:hover {
-  opacity: 0.2;
-  cursor: default;
-}
-
-.submit-form__button:hover {
+.submit-form__button_active:hover {
   opacity: 0.8;
   cursor: pointer;
 }

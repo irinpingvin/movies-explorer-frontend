@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SubmitForm from "../SubmitForm/SubmitForm";
 import InputError from "../InputError/InputError";
-import {useFormWithValidation, emailPattern} from "../FormWithValidation/FormWithValidation";
+import {useFormWithValidation, EMAIL_PATTERN} from "../FormWithValidation/FormWithValidation";
 
 function Register(props) {
   const {values, setValues, handleChange, isValid, errors} = useFormWithValidation({registerName: '', registerEmail: '', registerPassword: ''});
@@ -25,7 +25,7 @@ function Register(props) {
   return (
     <main className="register">
       <h2 className="register__title">Добро пожаловать!</h2>
-      <SubmitForm buttonText="Зарегистрироваться" onSubmitForm={handleSubmit} errorText={props.errorText} isValid={isValid}>
+      <SubmitForm buttonText="Зарегистрироваться" onSubmitForm={handleSubmit} errorMessage={props.errorMessage} isValid={isValid}>
         <div className="register__input-area">
           <p className="register__input-title">Имя</p>
           <input type="text" name="registerName" required className="register__input-value"
@@ -35,7 +35,7 @@ function Register(props) {
         <div className="register__input-area">
           <p className="register__input-title">E-mail</p>
           <input type="email" name="registerEmail" required className="register__input-value"
-                 id="register-email" minLength="2" maxLength="30" value={values.registerEmail} onChange={handleChange} pattern={emailPattern.source}/>
+                 id="register-email" minLength="2" maxLength="30" value={values.registerEmail} onChange={handleChange} pattern={EMAIL_PATTERN.source}/>
         </div>
         <InputError errorMessage={errors.registerEmail}/>
         <div className="register__input-area">

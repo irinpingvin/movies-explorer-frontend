@@ -20,7 +20,7 @@ function App() {
     email: ''
   });
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [submitErrorText, setSubmitErrorText] = React.useState('');
+  const [submitErrorMessage, setSubmitErrorMessage] = React.useState('');
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -44,15 +44,18 @@ function App() {
   }
 
   function handleChangeUserInfo(userInfo) {
-    setSubmitErrorText('');
     mainApi.updateUserInfo(userInfo)
       .then(user => {
         setCurrentUser(user);
-        setSubmitErrorText('Данные успешно обновлены!');
+        setSubmitErrorMessage('Данные успешно обновлены!');
       })
       .catch(error => {
-        console.log(error);
-        setSubmitErrorText(error);
+        setSubmitErrorMessage(error);
+      })
+      .finally(() => {
+        setTimeout(function() {
+          setSubmitErrorMessage('');
+        }, 4000);
       });
   }
 
@@ -62,26 +65,29 @@ function App() {
         localStorage.removeItem('jwt');
         setLoggedIn(false);
       })
-      .catch(error => console.log(error));
+      .catch(error => setSubmitErrorMessage(error))
+      .finally(() => {
+        setTimeout(function() {
+          setSubmitErrorMessage('');
+        }, 4000);
+      });
   }
 
   function handleRegister(userData) {
-    setSubmitErrorText('');
-
     mainApi.signUp(userData)
       .then(() => {
         handleLogin(userData);
       })
-      .catch(error => {
-        console.log(error);
-        setSubmitErrorText(error);
+      .catch(error => setSubmitErrorMessage(error))
+      .finally(() => {
+        setTimeout(function() {
+          setSubmitErrorMessage('');
+        }, 4000);
       });
   }
 
   function handleLogin(userData) {
     const {password, email} = userData;
-
-    setSubmitErrorText('');
 
     mainApi.signIn({password, email})
       .then(res => {
@@ -91,9 +97,11 @@ function App() {
           navigate('/movies');
         }
       })
-      .catch(error => {
-        console.log(error);
-        setSubmitErrorText(error);
+      .catch(error => setSubmitErrorMessage(error))
+      .finally(() => {
+        setTimeout(function() {
+          setSubmitErrorMessage('');
+        }, 4000);
       });
   }
 
@@ -104,7 +112,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={
               <>
-                <Header isNavigationNeeded="true" loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
                 <Main/>
                 <Footer/>
               </>
@@ -129,21 +137,21 @@ function App() {
             <Route path="/profile" element={
               <>
                 <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout} errorText={submitErrorText}/>
+                <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout} errorMessage={submitErrorMessage}/>
               </>
             }>
             </Route>
             <Route path="/signup" element={
               <>
                 <Header isNavigationNeeded={false} loggedIn={loggedIn}/>
-                <Register onRegister={handleRegister} errorText={submitErrorText}/>
+                <Register onRegister={handleRegister} errorMessage={submitErrorMessage}/>
               </>
             }>
             </Route>
             <Route path="/signin" element={
               <>
                 <Header isNavigationNeeded={false} loggedIn={loggedIn}/>
-                <Login onLogin={handleLogin} errorText={submitErrorText}/>
+                <Login onLogin={handleLogin} errorMessage={submitErrorMessage}/>
               </>
             }>
             </Route>

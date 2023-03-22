@@ -47,10 +47,11 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  height: 100vh;
 }
 
 .popup__navigation-links {
-  margin: 144px 0 444px;
+  margin: 144px 0 0;
   list-style: none;
   padding-inline-start: 0;
   align-items: center;
@@ -83,7 +84,7 @@
   }
 
   .popup__navigation-links {
-    margin: 159px 0 621px;
+    margin-top: 159px;
   }
 
   .popup__navigation-item {

@@ -38,23 +38,13 @@ function MoviesCard({ card, savedCards, onCardSave, isSavedMode }) {
   }
 
   function getMovieDurationInHours() {
-    let duration = card.duration;
-    let hours = 0;
-    let minutes = 0;
+    const hours = Math.trunc(card.duration / 60);
+    const minutes = card.duration % 60;
 
-    if (duration < 60)
-      return duration + 'м';
+    if (card.duration < 60)
+      return card.duration + 'м';
 
-    while (duration >= 60) {
-      duration -= 60;
-      hours++;
-      minutes = duration;
-    }
-
-    if (minutes > 0)
-      return hours + 'ч ' + minutes + 'м';
-    else
-      return hours + 'ч';
+    return minutes > 0 ? hours + 'ч ' + minutes + 'м' : hours + 'ч';
   }
 
   return (
