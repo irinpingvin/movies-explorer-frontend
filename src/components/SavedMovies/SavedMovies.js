@@ -24,6 +24,7 @@ function SavedMovies() {
     mainApi.deleteMovie(movieInfo._id)
       .then(() => {
         setSavedMovies(savedMovies.filter(element => element._id !== movieInfo._id));
+        setShownMovies(shownMovies.filter(element => element._id !== movieInfo._id));
       })
       .catch(error => console.log(error));
   }
