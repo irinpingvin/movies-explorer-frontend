@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import Header from '../Header/Header';
 import Footer from "../Footer/Footer";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
@@ -11,7 +11,7 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { CurrentUserContext } from "../../contexts/currentUser/CurrentUserContext";
+import {CurrentUserContext} from "../../contexts/currentUser/CurrentUserContext";
 import {mainApi} from "../../utils/MainApi";
 
 function App() {
@@ -54,7 +54,7 @@ function App() {
         setSubmitErrorMessage(error);
       })
       .finally(() => {
-        setTimeout(function() {
+        setTimeout(function () {
           setSubmitErrorMessage('');
         }, 4000);
       });
@@ -64,11 +64,15 @@ function App() {
     mainApi.signOut()
       .then(() => {
         localStorage.removeItem('jwt');
+        localStorage.removeItem('movies');
+        localStorage.removeItem('shownMovies');
+        localStorage.removeItem('searchRequest');
+        localStorage.removeItem('shortMovies');
         setLoggedIn(false);
       })
       .catch(error => setSubmitErrorMessage(error))
       .finally(() => {
-        setTimeout(function() {
+        setTimeout(function () {
           setSubmitErrorMessage('');
         }, 4000);
       });
@@ -81,7 +85,7 @@ function App() {
       })
       .catch(error => setSubmitErrorMessage(error))
       .finally(() => {
-        setTimeout(function() {
+        setTimeout(function () {
           setSubmitErrorMessage('');
         }, 4000);
       });
@@ -100,7 +104,7 @@ function App() {
       })
       .catch(error => setSubmitErrorMessage(error))
       .finally(() => {
-        setTimeout(function() {
+        setTimeout(function () {
           setSubmitErrorMessage('');
         }, 4000);
       });
@@ -120,34 +124,26 @@ function App() {
             }>
             </Route>
             <Route path="/movies" element={
-              <ProtectedRoute loggedIn={loggedIn} element={
-                <>
-                  <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                  <Movies />
-                  <Footer/>
-                </>
-              }>
+              <ProtectedRoute loggedIn={loggedIn}>
+                <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                <Movies />
+                <Footer/>
               </ProtectedRoute>
             }>
             </Route>
             <Route path="/saved-movies" element={
-              <ProtectedRoute loggedIn={loggedIn} element={
-                <>
-                  <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                  <SavedMovies />
-                  <Footer/>
-                </>
-              }>
+              <ProtectedRoute loggedIn={loggedIn}>
+                <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                <SavedMovies/>
+                <Footer/>
               </ProtectedRoute>
             }>
             </Route>
             <Route path="/profile" element={
-              <ProtectedRoute loggedIn={loggedIn} element={
-                <>
-                  <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                  <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout} errorMessage={submitErrorMessage}/>
-                </>
-              }>
+              <ProtectedRoute loggedIn={loggedIn}>
+                <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout}
+                         errorMessage={submitErrorMessage}/>
               </ProtectedRoute>
             }>
             </Route>
@@ -165,7 +161,7 @@ function App() {
               </>
             }>
             </Route>
-            <Route path="*" element={<PageNotFound/>} />
+            <Route path="*" element={<PageNotFound/>}/>
           </Routes>
           <NavigationPopup isOpen={isNavigationPopupOpen} onClose={closeNavigationPopup}/>
         </div>

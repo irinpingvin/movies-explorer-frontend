@@ -29,20 +29,22 @@ function SavedMovies() {
   }
 
   function handleMoviesSearch(searchRequest, isShortMoviesNeeded) {
-    const filteredMovies = moviesFilter.getFilteredMovies(savedMovies, searchRequest, isShortMoviesNeeded);
+    const filteredMoviesByName = moviesFilter.getFilteredMoviesByName(savedMovies, searchRequest);
+    const filteredMoviesByCheckbox = moviesFilter.getFilteredMoviesByCheckbox(filteredMoviesByName, isShortMoviesNeeded);
 
-    setIsNotificationNeeded(false);
-    setShownMovies(filteredMovies);
-
-    if (filteredMovies.length === 0) {
+    if (filteredMoviesByCheckbox.length === 0) {
       setIsNotificationNeeded(true);
       setNotificationText('Ничего не найдено');
+      setShownMovies([]);
+    } else {
+      setIsNotificationNeeded(false);
+      setShownMovies(filteredMoviesByCheckbox);
     }
   }
 
   return (
     <main className="saved-movies">
-      <SearchForm onSearchForm={handleMoviesSearch}/>
+      <SearchForm onSearchForm={handleMoviesSearch} onCheckboxClick={handleMoviesSearch}/>
       <MoviesCardList movies={shownMovies} onMovieSave={handleMovieDelete} isSavedMode={true}/>
       <p className={`saved-movies__error-message ${isNotificationNeeded ? 'saved-movies__error-message_active' : ''}`}>{notificationText}</p>
     </main>

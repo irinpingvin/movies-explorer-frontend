@@ -1,15 +1,24 @@
 class MoviesFilter {
-  getFilteredMovies(movies, searchRequest, isShortMoviesIncluded) {
-    return movies.filter(function(movie) {
-      if (isShortMoviesIncluded)
-        return movie.nameRU.toLowerCase().includes(searchRequest.toLowerCase());
-      else
-        return movie.nameRU.toLowerCase().includes(searchRequest.toLowerCase()) && movie.duration > 40;
-    });
+  getFilteredMoviesByName(movies, searchRequest) {
+    return movies.filter(movie => movie.nameRU.toLowerCase().includes(searchRequest.toLowerCase()));
   }
 
-  getPartMoviesList(movies, startPos, amount) {
-    return movies.slice(startPos, startPos + amount);
+  getFilteredMoviesByCheckbox(movies, isShortMoviesIncluded) {
+    return movies.filter(movie => isShortMoviesIncluded ? movie : movie.duration > 40);
+  }
+
+  getFirstPartMoviesList(movies, amount) {
+    return movies.slice(0, amount);
+  }
+
+  getNextPartMoviesList(movies, shownMoviesAmount, additionalAmount, isShortMoviesNeeded) {
+    const filteredMovies = this.getFilteredMoviesByCheckbox(movies, isShortMoviesNeeded);
+    return filteredMovies.slice(shownMoviesAmount, shownMoviesAmount + additionalAmount);
+  }
+
+  getRemainingMoviesAmount(movies, shownMoviesAmount, isShortMoviesNeeded) {
+    const filteredMovies = this.getFilteredMoviesByCheckbox(movies, isShortMoviesNeeded);
+    return filteredMovies.length - shownMoviesAmount;
   }
 }
 

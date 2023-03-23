@@ -13,9 +13,16 @@ function SearchForm(props) {
 
   React.useEffect(() => {
     if (location.pathname === '/movies') {
-      const request = JSON.parse(localStorage.getItem('searchRequest'));
-      setValues({...values, search: request.request});
-      setIsShortMoviesNeeded(request.shortMovies);
+      const request = localStorage.getItem('searchRequest');
+      const shortMovies = localStorage.getItem('shortMovies');
+
+      if (request) {
+        setValues({...values, search: request});
+      }
+
+      if (shortMovies != null) {
+        setIsShortMoviesNeeded(shortMovies === 'true');
+      }
     }
   }, [location.pathname]);
 
@@ -30,7 +37,14 @@ function SearchForm(props) {
   }
 
   function handleCheckboxClick(e) {
-    setIsShortMoviesNeeded(e.target.checked);
+    const checked = e.target.checked;
+    setIsShortMoviesNeeded(checked);
+
+    if (location.pathname === '/movies') {
+      props.onCheckboxClick(checked);
+    } else {
+      props.onCheckboxClick(values.search, checked);
+    }
   }
 
   return (

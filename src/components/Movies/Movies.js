@@ -6,6 +6,7 @@ import {moviesApi} from "../../utils/MoviesApi";
 import {moviesFilter} from "../../utils/MoviesFilter";
 import {mainApi} from "../../utils/MainApi";
 import Preloader from "../Preloader/Preloader";
+import {NOTHING_FOUND_TEXT} from "../../utils/constants";
 
 function Movies() {
   const [movies, setMovies] = React.useState([]);
@@ -15,19 +16,28 @@ function Movies() {
   const [isNotificationNeeded, setIsNotificationNeeded] = React.useState(false);
   const [notificationText, setNotificationText] = React.useState('');
   const [windowInnerWidth, setWindowInnerWidth] = React.useState(window.innerWidth);
+  const [moviesLeft, setMoviesLeft] = React.useState(0);
   const firstMoviesAmount = windowInnerWidth >= 1280 ? 12 : windowInnerWidth >= 768 ? 8 : 5;
   const additionalMoviesAmount = windowInnerWidth >= 1280 ? 3 : 2;
 
   React.useEffect(() => {
-    const movies = localStorage.getItem('movies');
-    const shownMovies = localStorage.getItem('shownMovies');
+    const localMovies = JSON.parse(localStorage.getItem('movies'));
+    const localShownMovies = JSON.parse(localStorage.getItem('shownMovies'));
+    const shortMovies = localStorage.getItem('shortMovies');
 
-    if (movies) {
-     setMovies(JSON.parse(movies));
+    if (localMovies) {
+      setMovies(localMovies);
     }
 
-    if (shownMovies) {
-      setShownMovies(JSON.parse(shownMovies));
+    if (localShownMovies) {
+      setShownMovies(localShownMovies);
+
+      if (localShownMovies.length === 0) {
+        setIsNotificationNeeded(true);
+        setNotificationText(NOTHING_FOUND_TEXT);
+      } else {
+        setMoviesLeft(moviesFilter.getRemainingMoviesAmount(localMovies, localShownMovies.length, shortMovies === 'true'));
+      }
     }
   }, []);
 
@@ -44,7 +54,7 @@ function Movies() {
 
     function handleWindowChange() {
       if (!resizeTimeout) {
-        resizeTimeout = setTimeout(function() {
+        resizeTimeout = setTimeout(function () {
           resizeTimeout = null;
           setWindowInnerWidth(window.innerWidth);
         }, 66);
@@ -62,34 +72,54 @@ function Movies() {
 
     moviesApi.getMovies()
       .then(moviesList => {
-        const filteredMovies = moviesFilter.getFilteredMovies(moviesList, searchRequest, isShortMoviesNeeded);
-        setMovies(filteredMovies);
-        if (filteredMovies.length === 0) {
-          setIsNotificationNeeded(true);
-          setNotificationText('Ничего не найдено');
-          setShownMovies([]);
-          localStorage.setItem('shownMovies', JSON.stringify([]));
+        const filteredMoviesByName = moviesFilter.getFilteredMoviesByName(moviesList, searchRequest);
+        setMovies(filteredMoviesByName);
+
+        if (filteredMoviesByName.length === 0) {
+          setEmptyResult();
         } else {
-          const partMoviesList = moviesFilter.getPartMoviesList(filteredMovies, 0, firstMoviesAmount);
-          setShownMovies(partMoviesList);
-          localStorage.setItem('shownMovies', JSON.stringify(partMoviesList));
+          renderMovies(filteredMoviesByName, isShortMoviesNeeded);
         }
 
-        localStorage.setItem('movies', JSON.stringify(filteredMovies));
-        localStorage.setItem('searchRequest', JSON.stringify({
-          request: searchRequest,
-          shortMovies: isShortMoviesNeeded
-        }));
+        localStorage.setItem('movies', JSON.stringify(filteredMoviesByName));
+        localStorage.setItem('searchRequest', searchRequest);
+        localStorage.setItem('shortMovies', isShortMoviesNeeded);
 
         setIsPreloaderNeeded(false);
       })
       .catch(() => {
-        setIsPreloaderNeeded(false);
-        setIsNotificationNeeded(true);
-        setNotificationText("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз");
-        setMovies([]);
-        setShownMovies([]);
+        setUnsuccessfulResult();
       });
+  }
+
+  function renderMovies(filteredMoviesByName, isShortMoviesNeeded) {
+    const filteredMoviesByCheckBox = moviesFilter.getFilteredMoviesByCheckbox(filteredMoviesByName, isShortMoviesNeeded);
+
+    if (filteredMoviesByCheckBox.length === 0) {
+      setEmptyResult();
+    }
+    const partMoviesList = moviesFilter.getFirstPartMoviesList(filteredMoviesByCheckBox, firstMoviesAmount);
+
+    setShownMovies(partMoviesList);
+    setMoviesLeft(moviesFilter.getRemainingMoviesAmount(filteredMoviesByName, partMoviesList.length, isShortMoviesNeeded));
+
+    localStorage.setItem('shownMovies', JSON.stringify(partMoviesList));
+    localStorage.setItem('shortMovies', isShortMoviesNeeded);
+  }
+
+  function setEmptyResult() {
+    setIsNotificationNeeded(true);
+    setNotificationText(NOTHING_FOUND_TEXT);
+    setShownMovies([]);
+    localStorage.setItem('shownMovies', JSON.stringify([]));
+  }
+
+  function setUnsuccessfulResult() {
+    setIsPreloaderNeeded(false);
+    setIsNotificationNeeded(true);
+    setNotificationText("Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз");
+    setMovies([]);
+    setShownMovies([]);
   }
 
   function handleMovieSaving(movieInfo) {
@@ -110,25 +140,36 @@ function Movies() {
   }
 
   function handleMoreMovies() {
-    const moviesPortion = moviesFilter.getPartMoviesList(movies, shownMovies.length, additionalMoviesAmount);
+    const shortMovies = JSON.parse(localStorage.getItem('shortMovies'));
+    const moviesPortion = moviesFilter.getNextPartMoviesList(movies, shownMovies.length, additionalMoviesAmount, shortMovies);
     const localShownMovies = JSON.parse(localStorage.getItem('shownMovies'));
+
     moviesPortion.forEach(item => {
       setShownMovies(shownMovies => [...shownMovies, item]);
       localShownMovies.push(item);
     });
+
+    setMoviesLeft(moviesFilter.getRemainingMoviesAmount(movies, localShownMovies.length, shortMovies));
+
     localStorage.setItem('shownMovies', JSON.stringify(localShownMovies));
+  }
+
+  function handleMovieCheckbox(isShortMoviesNeeded) {
+    renderMovies(movies, isShortMoviesNeeded);
   }
 
   return (
     <main className="page-movies">
-      <SearchForm onSearchForm={handleMoviesSearch}/>
+      <SearchForm onSearchForm={handleMoviesSearch} onCheckboxClick={handleMovieCheckbox}/>
       {isPreloaderNeeded ?
         <Preloader/>
         :
-        <MoviesCardList movies={shownMovies} savedMovies={savedMovies} onMovieSave={handleMovieSaving} isSavedMode={false}/>
+        <MoviesCardList movies={shownMovies} savedMovies={savedMovies} onMovieSave={handleMovieSaving}
+                        isSavedMode={false}/>
       }
-      <More moviesLeft={movies.length - shownMovies.length} onMoreClick={handleMoreMovies}/>
-      <p className={`movie__error-message ${isNotificationNeeded ? 'movie__error-message_active' : ''}`}>{notificationText}</p>
+      <More moviesLeft={moviesLeft} onMoreClick={handleMoreMovies}/>
+      <p
+        className={`movie__error-message ${isNotificationNeeded ? 'movie__error-message_active' : ''}`}>{notificationText}</p>
     </main>
   );
 }
