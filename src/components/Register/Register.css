@@ -47,7 +47,7 @@
 }
 
 .register__auth-caption {
-  margin: 14px 0 30px;
+  margin: 0;
   font-weight: 400;
   font-size: 12px;
   line-height: 1.25;
@@ -81,7 +81,6 @@
   .register__auth-caption {
     font-size: 14px;
     line-height: 1.2;
-    margin: 16px 0 70px;
   }
 
   .register__auth-link {

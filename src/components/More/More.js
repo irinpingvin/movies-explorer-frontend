@@ -1,8 +1,8 @@
 function More(props) {
   return (
     <section className="more">
-      {props.cards.length > 1 ? (
-        <button className="more-button">Ещё</button>
+      {props.moviesLeft > 0 ? (
+        <button className="more-button" onClick={props.onMoreClick}>Ещё</button>
         ) : null}
     </section>
   );

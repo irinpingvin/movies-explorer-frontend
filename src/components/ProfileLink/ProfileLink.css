@@ -4,7 +4,7 @@
   line-height: 1.15;
   color: #000000;
   text-decoration: none;
-  margin: 0;
+  margin: 0 0 20px;
   background-color: #F9F9F9;
   border-radius: 20px;
   width: 100px;
@@ -16,4 +16,10 @@
 
 .profile-link:hover {
   opacity: 0.8;
+}
+
+@media screen and (min-width: 1280px) {
+  .profile-link {
+    margin-bottom: 0;
+  }
 }

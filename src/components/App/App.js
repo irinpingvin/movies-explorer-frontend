@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import Header from '../Header/Header';
 import Footer from "../Footer/Footer";
 import NavigationPopup from "../NavigationPopup/NavigationPopup";
@@ -10,28 +10,31 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import { moviesList, savedMoviesList } from "../../utils/constants";
-import { CurrentUserContext } from "../../contexts/currentUser/CurrentUserContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import {CurrentUserContext} from "../../contexts/currentUser/CurrentUserContext";
+import {mainApi} from "../../utils/MainApi";
 
 function App() {
   const [isNavigationPopupOpen, setIsNavigationPopupOpen] = React.useState(false);
-  const [cards, setCards] = React.useState([]);
-  const [savedCards, setSavedCards] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({
     name: '',
     email: ''
   });
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [submitErrorMessage, setSubmitErrorMessage] = React.useState('');
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    setCards(moviesList);
-    setSavedCards(savedMoviesList);
-    setCurrentUser({
-      name: "Irina",
-      email: "test@mail.ru"
-    });
-    setLoggedIn(true);
-  }, []);
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      mainApi.validateToken()
+        .then(user => {
+          setLoggedIn(true);
+          setCurrentUser(user);
+        })
+        .catch(error => console.log(error));
+    }
+  }, [loggedIn]);
 
   function handleMenuClick() {
     setIsNavigationPopupOpen(true);
@@ -41,22 +44,70 @@ function App() {
     setIsNavigationPopupOpen(false);
   }
 
-  function handleSearchRequest(searchRequest) {
-  }
-
-  function handleCardSaved(card) {
-  }
-
   function handleChangeUserInfo(userInfo) {
+    mainApi.updateUserInfo(userInfo)
+      .then(user => {
+        setCurrentUser(user);
+        setSubmitErrorMessage('Данные успешно обновлены!');
+      })
+      .catch(error => {
+        setSubmitErrorMessage(error);
+      })
+      .finally(() => {
+        setTimeout(function () {
+          setSubmitErrorMessage('');
+        }, 4000);
+      });
   }
 
   function handleSignout() {
+    mainApi.signOut()
+      .then(() => {
+        localStorage.removeItem('jwt');
+        localStorage.removeItem('movies');
+        localStorage.removeItem('shownMovies');
+        localStorage.removeItem('searchRequest');
+        localStorage.removeItem('shortMovies');
+        setLoggedIn(false);
+      })
+      .catch(error => setSubmitErrorMessage(error))
+      .finally(() => {
+        setTimeout(function () {
+          setSubmitErrorMessage('');
+        }, 4000);
+      });
   }
 
   function handleRegister(userData) {
+    mainApi.signUp(userData)
+      .then(() => {
+        handleLogin(userData);
+      })
+      .catch(error => setSubmitErrorMessage(error))
+      .finally(() => {
+        setTimeout(function () {
+          setSubmitErrorMessage('');
+        }, 4000);
+      });
   }
 
   function handleLogin(userData) {
+    const {password, email} = userData;
+
+    mainApi.signIn({password, email})
+      .then(res => {
+        if (res.token) {
+          localStorage.setItem('jwt', res.token);
+          setLoggedIn(true);
+          navigate('/movies');
+        }
+      })
+      .catch(error => setSubmitErrorMessage(error))
+      .finally(() => {
+        setTimeout(function () {
+          setSubmitErrorMessage('');
+        }, 4000);
+      });
   }
 
   return (
@@ -66,50 +117,51 @@ function App() {
           <Routes>
             <Route exact path="/" element={
               <>
-                <Header isNavigationNeeded="true" loggedIn={loggedIn} onMenu={handleMenuClick}/>
+                <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
                 <Main/>
                 <Footer/>
               </>
             }>
             </Route>
             <Route path="/movies" element={
-              <>
+              <ProtectedRoute loggedIn={loggedIn}>
                 <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <Movies onSearchForm={handleSearchRequest} cards={cards} onCardSaved={handleCardSaved}/>
+                <Movies />
                 <Footer/>
-              </>
+              </ProtectedRoute>
             }>
             </Route>
             <Route path="/saved-movies" element={
-              <>
+              <ProtectedRoute loggedIn={loggedIn}>
                 <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <SavedMovies onSearchForm={handleSearchRequest} cards={savedCards} onCardSaved={handleCardSaved}/>
+                <SavedMovies/>
                 <Footer/>
-              </>
+              </ProtectedRoute>
             }>
             </Route>
             <Route path="/profile" element={
-              <>
+              <ProtectedRoute loggedIn={loggedIn}>
                 <Header isNavigationNeeded={true} loggedIn={loggedIn} onMenu={handleMenuClick}/>
-                <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout}/>
-              </>
+                <Profile onChangeUserInfo={handleChangeUserInfo} onSignoutClick={handleSignout}
+                         errorMessage={submitErrorMessage}/>
+              </ProtectedRoute>
             }>
             </Route>
             <Route path="/signup" element={
               <>
                 <Header isNavigationNeeded={false} loggedIn={loggedIn}/>
-                <Register onRegister={handleRegister}/>
+                <Register onRegister={handleRegister} errorMessage={submitErrorMessage}/>
               </>
             }>
             </Route>
             <Route path="/signin" element={
               <>
                 <Header isNavigationNeeded={false} loggedIn={loggedIn}/>
-                <Login onLogin={handleLogin}/>
+                <Login onLogin={handleLogin} errorMessage={submitErrorMessage}/>
               </>
             }>
             </Route>
-            <Route path="*" element={<PageNotFound/>} />
+            <Route path="*" element={<PageNotFound/>}/>
           </Routes>
           <NavigationPopup isOpen={isNavigationPopupOpen} onClose={closeNavigationPopup}/>
         </div>

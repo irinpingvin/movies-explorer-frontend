@@ -2,48 +2,41 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SubmitForm from "../SubmitForm/SubmitForm";
 import InputError from "../InputError/InputError";
+import {useFormWithValidation, EMAIL_PATTERN} from "../FormWithValidation/FormWithValidation";
 
 function Login(props) {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const {values, setValues, handleChange, isValid, errors} = useFormWithValidation({loginEmail: '', loginPassword: ''});
 
   React.useEffect(() => {
-    setEmail('')
-    setPassword('');
+    setValues({...values, loginEmail: '', loginPassword: ''});
   }, []);
-
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
-
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onLogin({
-      email,
-      password,
-    });
+    if (isValid) {
+      props.onLogin({
+        email: values.loginEmail,
+        password: values.loginPassword,
+      });
+    }
   }
 
   return (
     <main className="login">
       <h2 className="login__title">Рады видеть!</h2>
-      <SubmitForm buttonText="Войти" onSubmitForm={handleSubmit}>
+      <SubmitForm buttonText="Войти" onSubmitForm={handleSubmit} errorMessage={props.errorMessage} isValid={isValid}>
         <div className="login__input-area">
           <p className="login__input-title">E-mail</p>
-          <input type="text" name="login-name" required className="login__input-value"
-                 id="login-email" minLength="2" maxLength="30" value={email} onChange={handleEmailChange}/>
+          <input type="email" name="loginEmail" required className="login__input-value"
+                 id="login-email" minLength="2" maxLength="30" value={values.loginEmail} onChange={handleChange} pattern={EMAIL_PATTERN.source}/>
         </div>
-        <InputError/>
+        <InputError errorMessage={errors.loginEmail}/>
         <div className="login__input-area">
           <p className="login__input-title">Пароль</p>
-          <input type="password" name="login-password" required className="login__input-value"
-                 id="login-password" minLength="2" maxLength="30" value={password} onChange={handlePasswordChange}/>
+          <input type="password" name="loginPassword" required className="login__input-value"
+                 id="login-password" minLength="2" maxLength="30" value={values.loginPassword} onChange={handleChange}/>
         </div>
-        <InputError/>
+        <InputError errorMessage={errors.loginPassword}/>
       </SubmitForm>
       <p className="login__auth-caption">Ещё не зарегистрированы?&nbsp;
         <Link className="login__auth-link" to="/signup">Регистрация</Link>

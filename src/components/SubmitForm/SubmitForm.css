@@ -1,4 +1,11 @@
-.submit__form-button {
+.submit-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 48vh;
+}
+
+.submit-form__button {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.25;
@@ -16,52 +23,48 @@
   padding: 0;
 }
 
-.submit__form-button:hover {
+.submit-form__button_inactive {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.submit-form__button_active:hover {
   opacity: 0.8;
   cursor: pointer;
 }
 
-.submit__form-button_type_profile {
+.submit-form__button_type_profile {
   font-weight: 400;
   color: #000000;
   background: #FFFFFF;
   height: 15px;
-  margin-top: 377px;
 }
 
-.submit__form-button_type_register {
-  margin-top: 220px;
+.submit-form__error {
+  margin: 0 0 14px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+  text-align: center;
+  color: #000000;
+  display: none;
 }
 
-.submit__form-button_type_login {
-  margin-top: 310px;
+.submit-form__error_active {
+  display: block;
 }
 
 @media screen and (min-width: 768px) {
-  .submit__form-button {
+  .submit-form__button {
     font-size: 14px;
     line-height: 1.2;
     background-size: 396px 45px;
     width: 396px;
   }
 
-  .submit__form-button_type_register {
-    margin-top: 132px;
-  }
-
-  .submit__form-button_type_login {
-    margin-top: 222px;
-  }
-
-  .submit__form-button_type_profile {
-    margin-top: 210px;
+  .submit-form__button_type_profile {
     width: 410px;
     font-size: 13px;
-    line-height: 1.2;  }
-}
-
-@media screen and (min-width: 1280px) {
-  .submit__form-button_type_profile {
-    margin-top: 222px;
+    line-height: 1.2;
   }
 }

@@ -4,5 +4,23 @@
   line-height: 1.2;
   color: #FF3055;
   margin: 6px 0;
-  min-height: 30px;
+}
+
+.input-error_type_search-form {
+  font-size: 12px;
+  margin-bottom: 43px;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .input-error_type_search-form {
+    margin-bottom: 109px;
+    text-align: left;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .input-error_type_search-form {
+    margin-bottom: 69px;
+  }
 }

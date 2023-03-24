@@ -1,6 +1,6 @@
-function InputError() {
+function InputError(props) {
   return (
-    <span className="input-error"/>
+    <p className={`${props.isSearchForm ? 'input-error input-error_type_search-form' : 'input-error'}`}>{props.errorMessage}</p>
   );
 }
 
